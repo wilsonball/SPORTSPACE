@@ -4,17 +4,13 @@
 <div class="col-md-12 price_form">
   <div class="row">
 		<div class="col-md-12 price_tag">
-			<% if @court.price > 0 %>
-        <p class="text-center">$<%= @court.price %> Per Hour</p>
-      <% else %>
         <p class="text-center">Open Run</span>
-      <% end %>
 		</div>
 	</div>
   <p class="text-center">Let others know when you'll play here.</p>
   <div class="row">
     <div class="col-md-12">
-      <%= f.text_field :start, placeholder: 'Start Date & Time', class: 'form-control' %>
+      <%= f.text_field :start_time, placeholder: 'Start Date & Time', class: 'form-control' %>
     </div>
   </div>
   <br>
@@ -22,7 +18,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <%= f.text_field :end, placeholder: 'End Date & Time', class: 'form-control' %>
+      <%= f.text_field :end_time, placeholder: 'End Date & Time', class: 'form-control' %>
     </div>
   </div>
 
@@ -59,16 +55,17 @@
 
   $(function() {
 
-    $('#run_start').datetimepicker({
+    $('#run_start_time').datetimepicker({
         formatTime:'g:i a',
         minDate: 0,
         minTime: 0,
     });
 
-    $('#run_end').datetimepicker({
-        formatTime:'g:i a'
+    $('#run_end_time').datetimepicker({
+        formatTime:'g:i a',
+        minDate: 0,
+        minTime: 0,
     });
-
   });
 
 

@@ -1,0 +1,86 @@
+<%= form_for ([@court, @court.runs.new]) do |f| %>
+<div class="col-md-12 price_form">
+  <div class="row">
+		<div class="col-md-12 price_tag">
+        <p class="text-center">$<%= @court.price %> Per Hour</p>
+		</div>
+	</div>
+  <p class="text-center">Let others know when you'll play here.</p>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.text_field :start_time, placeholder: 'Start Date & Time', class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+  <p class="text-center">UNTIL</p>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.text_field :end_time, placeholder: 'End Date & Time', class: 'form-control' %>
+    </div>
+  </div>
+
+
+  <%= f.hidden_field :court_id, value: @court.id %>
+  <%= f.hidden_field :price, value: @court.price %>
+  <%= f.hidden_field :total, id: 'run_total' %>
+
+  <h4><span id="message"></span></h4>
+
+	<div id="preview" style="display:none">
+		<table class="run-table">
+			<tbody>
+				<tr>
+					<td>Hour(s)</td>
+					<td><span id="run_hours"></span></td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>$<span id="run_sum"></span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="col-md-12">
+    <%= f.submit "Requst Booking", id: "btn_book", class: "btn btn-primary wide" %>
+  </div>
+  &nbsp;
+</div>
+<% end %>
+
+<script>
+
+  $(function() {
+
+    unavailableDates = [];
+
+    $.ajax({
+      url: '/preload',
+      data: {'court_id': <%= @court.id %>},
+      dataType: 'json',
+      success: function(data) {
+
+        $.each(data, function(arrID, arrValue) {
+          for (var d = new Date(arrValue.start_time); d <= new Date(arrValue.end_time); d.setDate(d.getDate() + 1)) {
+            unavailableDates.push($.datetimepicker.formatDate('d-m-yy', d));
+          }
+        })
+      }
+    });
+
+    $('#run_start_time').datetimepicker({
+        formatTime:'g:i a',
+        minDate: 0,
+        minTime: 0,
+        beforeShowDay: unavailableDates
+    });
+
+    $('#run_end_time').datetimepicker({
+        formatTime:'g:i a',
+
+    });
+  });
+
+
+</script>

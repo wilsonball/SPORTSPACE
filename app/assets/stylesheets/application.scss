@@ -349,3 +349,7 @@ hr {
   background-color: #fcad6b;
   outline: none;
 }
+
+.form-control[readonly] {
+	background-color:white;
+}

@@ -88,7 +88,13 @@
 						</div>
 						<div class="col-md-4">
 							<!--runs form-->
-							<%= render 'runs/form' %>
+							<p>
+								<% if @court.price > 0 %>
+								<%= render 'runs/cost' %>
+								<% else %>
+								<%= render 'runs/form' %>
+								<% end %>
+							</p>
 						</div>
 						<!--<div class="col-md-3 text-center">
 							<h4>Court Manager</h4>
@@ -99,7 +105,7 @@
 					<br>
 
 					<!--icons-->
-					<div class="row">
+					<div class="col-md-8">
 						<div class="row text-center row-space-1">
 								<div class="col-sm-3">
 									<i class="fa fa-home fa-2x"></i>
@@ -137,7 +143,7 @@
 
 					<!--summary-->
 					<div class="row">
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<h3>Court Description</h3>
 							<p><%= @court.summary %></p>
 						</div>
@@ -146,8 +152,8 @@
 					<!--court features-->
 					<h3>Court Features</h3>				
 					<div class"row">
-							<div class="col-md-12">
-								<div class="col-md-6">
+							<div class="col-md-8">
+								<div class="col-md-6 pull-left">
 									<ul class="amenities">
 										<li class="<%= 'text-line-through' if !@court.is_3pt %>">3PT</li>
 										<li class="<%= 'text-line-through' if !@court.is_ncaa3pt %>">NCAA 3PT</li>
@@ -166,7 +172,7 @@
 
 					<!--Reviews-->
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-8">
 							<h3>Reviews</h3>
 								<div>
 									<%= render 'reviews/form' if !@hasReview %>

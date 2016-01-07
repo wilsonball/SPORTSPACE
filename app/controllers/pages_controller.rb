@@ -21,7 +21,7 @@ class PagesController < ApplicationController
 
     if params[:time].present? && params[:time].strip != ""
       @search = @search
-        .where("runs.start <= ? AND runs.end >= ?", params[:time], params[:time])
+        .where("runs.start_time <= ? AND runs.end_time >= ?", params[:time], params[:time])
     end
 
     #if params[:name].present? && params[:name].strip != ""
