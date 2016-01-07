@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  court_type: MyString
+  court_floor: MyString
+  court_count: 1
+  listing_name: MyString
+  address: MyString
+  summary: MyText
+  is_3pt: false
+  is_ncaa3pt: false
+  is_nba3pt: false
+  is_centercircle: false
+  is_key: false
+  is_freethrowline: false
+
+two:
+  court_type: MyString
+  court_floor: MyString
+  court_count: 1
+  listing_name: MyString
+  address: MyString
+  summary: MyText
+  is_3pt: false
+  is_ncaa3pt: false
+  is_nba3pt: false
+  is_centercircle: false
+  is_key: false
+  is_freethrowline: false

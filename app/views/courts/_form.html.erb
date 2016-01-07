@@ -1,0 +1,149 @@
+<div class="panel panel-default">
+	<div class="panel-heading text-center" style="background-color:#FA8320; color:white">
+		List A Court
+	</div>
+	<div class="panel-body">
+		<div class="container">
+
+			<%= form_for @court, html: {multipart: true} do |f| %>
+
+				<div class="row">
+					<h2 class="text-center">Name & Address</h2>
+					<div class="col-md-12 form-group">
+						<%= f.text_field :listing_name, placeholder: "Court Name", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<%= f.text_field :address, placeholder: "Address", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<%= f.text_area :summary, rows: 5, placeholder: "Describe this court as best as possible.", class: "form-control" %>
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="row">
+					<h2 class="text-center">Floor & Hoop</h2>
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<%= f.select :court_type, [["Outdoor","Outdoor"], ["Covered Outdoor", "Covered Outdoor"], ["Indoor","Indoor"]], id: "court_type", prompt: "Court Type", class: "form-control" %>
+						</div>
+					</div>
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<%= f.select :court_floor, [["Hardwood","Hardwood"], ["Colored Cement","Colored Cement"], ["Blacktop Cement","Blacktop Cement"]], prompt: "Floor Type", class: "form-control" %>
+						</div>
+					</div>
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<%= f.select :court_count, [["0.5", 0.5], ["1",1], ["1.5",1.5], ["2",2], ["2.5",2.5], ["3",3]], prompt: "# of Courts", class: "form-control" %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<%= f.select :rim_type, [["Single Rim","Single Rim"], ["Double Rim", "Double Rim"]], prompt: "Rim Type", class: "form-control" %>
+						</div>
+
+					</div>
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<%= f.select :backboard, [["Metal","Metal"], ["Plastic","Plastic"], ["Glass","Glass"]], prompt: "Backboard", class: "form-control" %>
+						</div>
+
+					</div>
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<%= f.select :rim_height, [["Under 10 Feet", "Under 10 Feet"], ["10 Feet","10 Feet"], ["Over 10 Feet","Over 10 Feet"]], prompt: "Rim Height", class: "form-control" %>
+						</div>
+
+					</div>
+				</div>
+
+				<!--WAITLIST?-->
+
+				<hr>
+
+				<div class="col-md-12 row">
+					<h2 class="text-center">Lines & More</h2>
+						<div class="col-md-4">										
+							<div class="form-group">
+								<%= f.check_box :is_3pt %> 3 Pt Line
+							</div>
+							<div class="form-group">
+								<%= f.check_box :is_ncaa3pt %> NCAA 3 Pt Line
+							</div>
+							<div class="form-group">
+								<%= f.check_box :is_nba3pt %> NBA 3 Pt Line
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<%= f.check_box :is_centercircle %> Center Circle
+							</div>
+							<div class="form-group">
+								<%= f.check_box :is_freethrowline %> Free Throw Line
+							</div>
+							<div class="form-group">
+								<%= f.check_box :is_key %> Key
+							</div>
+						</div>
+					
+				</div>
+
+				<hr>
+
+				<!--checkbox for active-->
+				<div class="col-md-12 row">
+					<h2 class="text-center">Availability</h2>
+						<div class="form-group text-center">
+							<%= f.check_box :is_active %> Is this court available to rent?
+						</div>
+				</div>		
+
+				<!--Price Holder-->				
+				<div class="col-md-12 row text-center">
+					<div class="col-md-4 col-md-offset-4">
+						<div class="form-group">
+							<label>Hourly Price</label>
+							<div class="input-group">
+								<div class="input-group-addon"></div>
+								<%= f.text_field :price, placeholder: "$", class: "form-control" %>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+
+				<!--photos-->
+				<div class="col-md-12 row text-center">
+					<div class="col-md-4 col-md-offset-4">
+						<h2 class="text-center">Photos</h2>
+						<div class="form-group">
+							<span class="btn btn-default btn-file">
+								<i class="fa fa-cloud-upload fa-lg"></i> Upload Photos
+								<%= file_field_tag "images[]", type: :file, multiple: true %>
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div id="photos"><%= render 'photos/list' %></div>
+
+				<div class="col-md-12 row actions text-center">
+					<%= f.submit "Save", class: "btn btn-primary wide50" %>
+				</div>
+
+			<% end %>
+		</div>
+	</div>
+</div>

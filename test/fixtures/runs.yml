@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  court_id: 
+  start_time: 2015-12-22 23:56:27
+  end_time: 2015-12-22 23:56:27
+  avail_date: 2015-12-22
+  price: 1
+  total: 1
+
+two:
+  user_id: 
+  court_id: 
+  start_time: 2015-12-22 23:56:27
+  end_time: 2015-12-22 23:56:27
+  avail_date: 2015-12-22
+  price: 1
+  total: 1

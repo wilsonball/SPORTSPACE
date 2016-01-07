@@ -1,0 +1,141 @@
+<!--can't edit or remove?-->
+
+<%= form_for ([@court, @court.runs.new]) do |f| %>
+<div class="col-md-12 price_form">
+  <div class="row">
+		<div class="col-md-12 price_tag">
+			<% if @court.price > 0 %>
+        <p class="text-center">$<%= @court.price %> Per Hour</p>
+      <% else %>
+        <p class="text-center">Open Run</span>
+      <% end %>
+		</div>
+	</div>
+  <p class="text-center">When can you play at this court?</p>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.text_field :start, placeholder: 'Start Date & Time', class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+  <p class="text-center">UNTIL</p>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.text_field :end, placeholder: 'End Date & Time', class: 'form-control' %>
+    </div>
+  </div>
+
+
+  <%= f.hidden_field :court_id, value: @court.id %>
+  <%= f.hidden_field :price, value: @court.price %>
+  <%= f.hidden_field :total, id: 'run_total' %>
+
+  <h4><span id="message"></span></h4>
+
+	<div id="preview" style="display:none">
+		<table class="run-table">
+			<tbody>
+				<tr>
+					<td>Hour(s)</td>
+					<td><span id="run_hours"></span></td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>$<span id="run_sum"></span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="col-md-12">
+    <%= f.submit "Set Available Time", id: "btn_book", class: "btn btn-primary wide" %>
+  </div>
+  &nbsp;
+</div>
+<% end %>
+
+<script>
+
+  $(function() {
+
+    $('#run_start').datetimepicker({
+
+    });
+
+    $('#run_end').datetimepicker({
+
+    });
+
+  });
+
+
+</script>
+
+<!--<script>
+  $(function() {
+    $('#run_avail_date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        minDate: 0
+    });
+  	$('#run_start_time').pickatime({
+        onSelect: function(selected) {
+        $('run_start_time').pickatime("option", "maxTime", selected);
+
+        var start_time = $(this).pickatime('getTime');
+        var end_time = $('#run_end_time').pickatime('getTime');
+        var hours = (start_time - end_time)/1000/60/60
+
+        var input = {
+          'start_time': start_time,
+          'end_time': end_time,
+          'court_id': <%= @court.id %>
+        }
+
+        $.ajax({
+          url: "/preview",
+          data: input,
+          success: function(data) {
+            $('preview').show();
+            $('btn_book').attr('disabled', true);
+
+            var total = hours * <%= @court.price %>
+            $('#run_hours').text(hours);
+            $('#run_sum').text(total);
+            $('#run_total').val(total);
+          }
+        });
+
+  	});
+  	$('#run_end_time').pickatime({
+  		onSelect: function(selected) {
+        $('run_start_time').pickatime("option", "maxTime", selected);
+
+        var start_time = $('#run_start_time').pickatime('getTime');
+        var end_time = $(this).pickatime('getTime');
+        var hours = (start_time - end_time)/1000/60/60
+
+        var input = {
+          'start_time': start_time,
+          'end_time': end_time,
+          'court_id': <%= @court.id %>
+        }
+
+        $.ajax({
+          url: "/preview",
+          data: input,
+          success: function(data) {
+            $('preview').show();
+            $('btn_book').attr('disabled', false);
+
+            var total = hours * <%= @court.price %>
+            $('#run_hours').text(hours);
+            $('#run_sum').text(total);
+            $('#run_total').val(total);
+          }
+        });
+      }
+  	});
+
+  });
+</script>-->

@@ -1,0 +1,85 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="center">
+			<%= image_tag avatar_url(@user), class: "avatar-full" %>
+			<h2><%= @user.fullname %></h2>
+			<% if current_user == @user %>
+				<div class="row-space-2">
+					<%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary wide" %>
+				</div>
+			<% end %>
+			<% if current_user != @user %>
+				<div class="row-space-2">
+					<%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: 'post', class: "btn btn-primary wide" %>
+				</div>
+			<% end %>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Verification</div>
+			<div class="panel-body">
+				Email Address<br>
+				Phone Number
+			</div>
+	    </div>
+	</div>
+	<div class="col-md-9">
+
+		<div class="description row-space-3">
+			<%= @user.description %>
+		</div>
+
+		<h4>My Courts</h4><br>
+
+		<div class="row">
+			<!--if no courts then put "List your first court!"-->
+				<% @courts.each do |court| %>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading preview">
+							<%= image_tag court.photos[0].image.url(:medium) if court.photos.length > 0 %>
+						</div>
+						<div class="panel-body">
+							<%= link_to court.listing_name, court %><br>
+							
+								<span id="average_rating"></span><br>
+								<%= court.reviews.count %> Review(s)<br>
+								<%= court.average_rating %> Stars
+							
+						</div>
+					</div>
+				</div>
+
+				<script>
+					$('#average_rating').raty({
+						path: '/assets',
+						readOnly: true,
+						score: <%= court.average_rating %>
+					});
+				</script>
+				<% end %>
+			
+		</div>
+
+		<h4>Reviews</h4><br>
+
+		<% @courts.each do |court| %>
+		  <% if !court.reviews.blank? %>
+		    <% court.reviews.each do |review| %>
+		      <div class="row">
+		      	<div class="col-md-2 text-center">
+		      	  <%= image_tag avatar_url(review.user), class: "img-circle avatar-medium" %><br>
+		      	  <%= review.user.fullname %>
+		      	</div>
+		      	<div class="col-md-10">
+		      	  <%= link_to court.listing_name, court %><br>
+		      	  <%= review.comment %><br>
+		      	  <%= review.created_at.strftime("%v") %>
+		      	</div>
+		      </div>
+		      <br>
+		    <% end %>
+		  <% end %>
+		<% end %>
+
+	</div>
+</div>
