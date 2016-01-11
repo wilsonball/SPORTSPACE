@@ -4,13 +4,13 @@
 <div class="col-md-12 price_form">
   <div class="row">
 		<div class="col-md-12 price_tag">
-        <p class="text-center">Open Run</span>
+        <p class="text-center">Schedule Availability</span>
 		</div>
 	</div>
-  <p class="text-center">Let others know when you'll play here.</p>
+  <p class="text-center">Let others know when you'll be here.</p>
   <div class="row">
     <div class="col-md-12">
-      <%= f.text_field :start_time, placeholder: 'Start Date & Time', class: 'form-control' %>
+      <%= f.text_field :start_time, placeholder: 'Start Date & Time', readonly: true, class: 'form-control' %>
     </div>
   </div>
   <br>
@@ -18,7 +18,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <%= f.text_field :end_time, placeholder: 'End Date & Time', class: 'form-control' %>
+      <%= f.text_field :end_time, placeholder: 'End Date & Time', readonly: true, class: 'form-control' %>
     </div>
   </div>
 
@@ -64,7 +64,6 @@
     $('#run_end_time').datetimepicker({
         formatTime:'g:i a',
         minDate: 0,
-        minTime: 0,
     });
   });
 

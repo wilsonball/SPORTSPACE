@@ -15,11 +15,13 @@ class CourtsController < ApplicationController
   end
 
   def new
-    @court = current_user.courts.build
+    user = User.find(1)
+    @court = user.courts.build
   end
 
   def create
-    @court = current_user.courts.build(court_params)
+    user = User.find(1)
+    @court = user.courts.build(court_params)
 
       if @court.save
 
@@ -30,7 +32,11 @@ class CourtsController < ApplicationController
         end
 
         @photos = @court.photos
-        redirect_to court_path(@court), notice: "Saved!"
+        if current_user && current_user == @court.user
+          redirect_to court_path(@court), notice: "Saved!"
+        else
+          redirect_to root_path, notice: "Your listing has been submitted for review."
+        end
       else
         flash[:alert] = "Please provide all information for this court."
         render :new
@@ -41,7 +47,7 @@ class CourtsController < ApplicationController
     if current_user.id == @court.user.id
       @photos = @court.photos
     else
-      redirect_to root_path, notice: "You don't have permission!"
+      redirect_to court_path, notice: "You don't have permission!"
     end
   end
 
@@ -55,7 +61,7 @@ class CourtsController < ApplicationController
       end  
       redirect_to court_path, notice: "Updated!"
     else
-      render :edit
+      render :edit, notice: "Update failed. Please try again."
     end
   end
 
@@ -65,6 +71,6 @@ class CourtsController < ApplicationController
     end
 
     def court_params
-      params.required(:court).permit(:court_type, :court_floor, :court_count, :listing_name, :summary, :address, :is_3pt, :is_ncaa3pt, :is_nba3pt, :is_centercircle, :is_key, :is_freethrowline, :is_active, :price)
+      params.required(:court).permit(:court_type, :court_floor, :court_count, :listing_name, :summary, :address, :is_3pt, :is_ncaa3pt, :is_nba3pt, :is_centercircle, :is_key, :is_freethrowline, :rim_type, :rim_height, :backboard, :price, :is_active)
     end
 end

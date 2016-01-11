@@ -102,27 +102,27 @@
 				<hr>
 
 				<!--checkbox for active-->
-				<!--<div class="col-md-12 row">
+				<div class="col-md-12 row">
 					<h2 class="text-center">Availability</h2>
-						<div class="form-group text-center">-->
-							<%= f.hidden_field :is_active, value: '0' %> <!--Is this court available to rent?
+						<div class="form-group text-center">
+							<%= f.check_box :is_active %> Is this court available to rent?
 						</div>
-				</div>-->
+				</div>
 
 				<!--Price Holder-->				
-				<!--<div class="col-md-12 row text-center">
+				<div class="col-md-12 row text-center">
 					<div class="col-md-4 col-md-offset-4">
 						<div class="form-group">
 							<label>Hourly Price</label>
 							<div class="input-group">
-								<div class="input-group-addon"></div>-->
-								<%= f.hidden_field :price, value: '0', placeholder: "$", class: "form-control" %>
-							<!--</div>
+								<div class="input-group-addon"></div>
+								<%= f.text_field :price, placeholder: "$", class: "form-control" %>
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<hr>-->
+				<hr>
 
 				<!--photos-->
 				<div class="col-md-12 row text-center">

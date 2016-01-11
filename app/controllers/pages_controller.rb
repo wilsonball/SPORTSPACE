@@ -28,7 +28,8 @@ class PagesController < ApplicationController
       #puts "adding name search"
       @search = @search
         .ransack(listing_name_cont: params[:name])
-      @search = @search.result
+      @search = @search
+        .result
         .ransack(params[:q])
     #end
 

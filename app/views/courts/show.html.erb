@@ -1,42 +1,5 @@
 <div class="panel panel-default">
 
-				<!--Carousel-->
-				<div class="row">
-					<div class="col-md-12">
-						<div id="myCarousel" class="carousel slide" data-ride="carousel">
-						  <!-- Indicators -->
-						  <% if @photos %>				  
-							  <ol class="carousel-indicators">
-							  	<% @photos.each do |photo| %>
-							    	<li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
-							    <% end %>
-							  </ol>
-						  <% end %>
-
-						  <!-- Wrapper for slides -->
-						  <div class="carousel-inner" role="listbox">
-						  	<% if @photos %>
-						  	  <% @photos.each do |photo| %>
-						    	<div class="item <%= 'active' if photo.id == @photos[0].id %>">
-						      		<%= image_tag photo.image.url() %>
-						    	</div>
-						      <% end %>
-						    <% end %>
-						    </div>			    
-
-						  <!-- Left and right controls -->
-						  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-						    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						    <span class="sr-only">Previous</span>
-						  </a>
-						  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-						    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						    <span class="sr-only">Next</span>
-						  </a>
-						</div>
-					</div>
-				</div>
-
 	<div class="panel-body">
 		<div class="col-md-12">
 		<!--Main Info-->
@@ -47,7 +10,11 @@
 					<div class="row">					
 						<div class="col-md-8">
 							<h2><strong><%= @court.listing_name %></strong></h2>
-							<p><%= link_to "Edit My Listing", edit_court_path if current_user && current_user == @court.user %></p>
+								<% if current_user && current_user == @court.user %>
+									<p><%= link_to "Edit My Listing", edit_court_path%></p>
+								<% else %>
+									<!--<p><%= link_to "Suggest Edits To This Listing", edit_court_path %></p>-->
+								<% end %>
 							<span id="average_rating"></span> (<%= @court.average_rating %> Stars) <%= @reviews.count %> Review(s)
 							<h4><%= @court.address %></h4>					
 							<!--Gmap-->
@@ -85,28 +52,9 @@
 
 								</div>
 							</div>
-						</div>
-						<div class="col-md-4">
-							<!--runs form-->
-							<p>
-								<% if @court.price > 0 %>
-								<%= render 'runs/cost' %>
-								<% else %>
-								<%= render 'runs/form' %>
-								<% end %>
-							</p>
-						</div>
-						<!--<div class="col-md-3 text-center">
-							<h4>Court Manager</h4>
-							<%= image_tag avatar_url(@court.user), class: "img avatar-large" %><br><br>
-							<%= @court.user.fullname %>
-						</div>-->
-					</div>
-					<br>
-
-					<!--icons-->
-					<div class="col-md-8">
-						<div class="row text-center row-space-1">
+												<!--icons-->
+					<div class="col-md-12">
+						<div class="row text-center row-space-3">
 								<div class="col-sm-3">
 									<i class="fa fa-home fa-2x"></i>
 									<p><%= @court.court_type %> Court</p>
@@ -143,7 +91,7 @@
 
 					<!--summary-->
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-12">
 							<h3>Court Description</h3>
 							<p><%= @court.summary %></p>
 						</div>
@@ -152,7 +100,7 @@
 					<!--court features-->
 					<h3>Court Features</h3>				
 					<div class"row">
-							<div class="col-md-8">
+							<div class="col-md-12">
 								<div class="col-md-6 pull-left">
 									<ul class="amenities">
 										<li class="<%= 'text-line-through' if !@court.is_3pt %>">3PT</li>
@@ -168,7 +116,66 @@
 								</div>
 							</div>					
 					</div>
-					<hr>
+
+						</div>
+						<div class="col-md-4">
+							<!--runs form-->
+							<p>
+								<%= render 'runs/form' %>
+							</p>
+							<p>
+								<%= render 'seengames/form' %>
+							</p>
+							<p>
+								<%= render 'seenplayers/form' %>
+							</p>
+						</div>
+						<!--<div class="col-md-3 text-center">
+							<h4>Court Manager</h4>
+							<%= image_tag avatar_url(@court.user), class: "img avatar-large" %><br><br>
+							<%= @court.user.fullname %>
+						</div>-->
+					</div>
+					<br>
+
+					<!--Carousel-->
+				<div class="row">
+					<div class="col-md-12">
+						<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						  <!-- Indicators -->
+						  <% if @photos %>				  
+							  <ol class="carousel-indicators">
+							  	<% @photos.each do |photo| %>
+							    	<li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
+							    <% end %>
+							  </ol>
+						  <% end %>
+
+						  <!-- Wrapper for slides -->
+						  <div class="carousel-inner" role="listbox">
+						  	<% if @photos %>
+						  	  <% @photos.each do |photo| %>
+						    	<div class="item <%= 'active' if photo.id == @photos[0].id %>">
+						      		<%= image_tag photo.image.url() %>
+						    	</div>
+						      <% end %>
+						    <% end %>
+						    </div>			    
+
+						  <!-- Left and right controls -->
+						  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+						    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						    <span class="sr-only">Previous</span>
+						  </a>
+						  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+						    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						    <span class="sr-only">Next</span>
+						  </a>
+						</div>
+					</div>
+				</div>
+
+				<hr>
 
 					<!--Reviews-->
 					<div class="row">

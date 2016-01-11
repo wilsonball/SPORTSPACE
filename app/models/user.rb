@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :runs
   has_many :reviews
   has_many :photos
+  has_many :seengames
+  has_many :seenplayers
 
   def self.from_omniauth(auth)
   	user = User.where(email: auth.info.email).first
@@ -27,5 +29,14 @@ class User < ActiveRecord::Base
   			user.password = Devise.friendly_token[0,20]
   		end
   	end
+  end
+
+  def set_ip
+    
+  end
+
+  def set_location
+    self.location = LocationService.query(self)
+    
   end
 end

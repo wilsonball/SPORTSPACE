@@ -17,7 +17,7 @@
 	  	  		  			<%= image_tag court.photos[0].image.url(:thumb) if court.photos.length > 0 %>
 	  	  		  		</div>  	  		  		
 	  	  		  		<div class="col-md-7">
-	  	  		  			<h4><%= court.listing_name %></h4> 
+	  	  		  			<h4><%= link_to court.listing_name, court %></h4> 
 	  	  		  		</div>
 	  	  		  		<div class="col-md-3 right">
 	  	  		  			<%= link_to "Update", edit_court_path(court), class: "btn btn-primary" %>

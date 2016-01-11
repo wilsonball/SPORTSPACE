@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Your Conversations</div>
+			<div class="panel-heading text-center">Your Conversations</div>
 			<div class="panel-body">
 				<div class="container">
 					<% @conversations.each do |conversation| %>
@@ -11,12 +11,10 @@
 								<div class="col-md-2">
 									<%= image_tag avatar_url(other), class: "img-circle avatar-medium" %>
 								</div>
-								<div class="col-md-2">
+								<div class="col-md-10" style="font-weight:bold">
 									<%= other.fullname %><br>
-									<%= conversation.messages.last.message_time %>
-								</div>
-								<div class="col-md-8">
-									<%= conversation.messages.last.content %>
+									<p><%= conversation.messages.last.message_time %></p>
+									<p><%= conversation.messages.last.content %></p>
 								</div>
 							</div>
 						<% end %>

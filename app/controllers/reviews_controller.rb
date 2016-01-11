@@ -2,7 +2,15 @@ class ReviewsController < ApplicationController
 
 	def create
 		@review = current_user.reviews.create(review_params)
-		redirect_to @review.court
+		if @review.save
+			redirect_to @review.user, notice: "Thank you for writing a review!"
+		else
+			redirect_to @review.court, notice: "Missing rating or comment. Please try again!"
+		end
+	end
+
+	def update
+		
 	end
 
 	def destroy

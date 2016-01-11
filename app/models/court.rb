@@ -3,6 +3,8 @@ class Court < ActiveRecord::Base
 	has_many :photos
 	has_many :runs
 	has_many :reviews
+	has_many :seenplayers
+	has_many :seengames
 
 	geocoded_by :address
 	after_validation :geocode, if: :address_changed?

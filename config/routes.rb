@@ -12,7 +12,13 @@ Rails.application.routes.draw do
   resources :courts
   resources :photos
   resources :courts do
-    resources :runs, only: [:create]
+    resources :runs, only: [:create, :destroy]
+  end
+  resources :courts do
+    resources :seengames, only: [:create]
+  end
+  resources :courts do
+    resources :seenplayers, only: [:create]
   end
   resources :conversations, only: [:index, :create] do
     resources :messages, only: [:index, :create]

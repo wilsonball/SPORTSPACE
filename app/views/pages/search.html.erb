@@ -85,27 +85,32 @@
 				<div class="row">
 					<% @arrCourts.each do |court| %>
 
-						<div class="col-md-12">
-							<div class="panel">
-								<div class="row">
-									<span style="float:left; margin-right:5px;"><%= image_tag court.show_first_photo %></span>
+						<div class="row">
+							<div class="row">
+								<div class="col-md-3">
+									<%= image_tag court.show_first_photo %>
+								</div>
+								<div class="col-md-9">
 									<h4 style="font-weight:bold"> <%= link_to court.listing_name, court %></h4>
-									<p><%= court.average_rating %> Stars | <%= court.reviews.count %> Reviews</p>
-									<p><%= court.address %></p>
+									<%= court.average_rating %> Stars | <%= court.reviews.count %> Reviews<br>
+									<%= court.address %>
 									<% if params[:time].present? && params[:time].strip != "" %>
 									<p><%= court.num_runs %> Person(s) Playing Here @ <%= params[:time] %></p>
 									<% else %>
 									<p><%= court.num_runs %> Person(s) Played Here</p>
 									<% end %>
+									(players) players last seen at (created at) <%= court.seenplayers.last %><br>
+									(games) games back last reported at (created_at) <%= court.seengames.count %>
 								</div>
 							</div>
 						</div>
+						<hr>
 					<% end %>
 				</div>
 			</div>
 
 			<div class="col-md-6">
-				<div id="map" style="width:100%;height:600px;float:right">
+				<div id="map" style="width:100%;height:400px;float:right">
 						<script src="https://maps.googleapis.com/maps/api/js"></script>
 								    <script>
 								      function initialize() {
@@ -187,5 +192,3 @@ $(function() {
 	});
 
 </script>
-
-<script>

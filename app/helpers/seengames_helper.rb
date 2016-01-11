@@ -1,0 +1,2 @@
+module SeengamesHelper
+end

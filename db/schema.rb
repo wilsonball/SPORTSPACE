@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107213357) do
+ActiveRecord::Schema.define(version: 20160110112822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,28 @@ ActiveRecord::Schema.define(version: 20160107213357) do
   add_index "runs", ["court_id"], name: "index_runs_on_court_id", using: :btree
   add_index "runs", ["user_id"], name: "index_runs_on_user_id", using: :btree
 
+  create_table "seengames", force: :cascade do |t|
+    t.integer  "games"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "court_id"
+  end
+
+  add_index "seengames", ["court_id"], name: "index_seengames_on_court_id", using: :btree
+  add_index "seengames", ["user_id"], name: "index_seengames_on_user_id", using: :btree
+
+  create_table "seenplayers", force: :cascade do |t|
+    t.integer  "players"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "court_id"
+  end
+
+  add_index "seenplayers", ["court_id"], name: "index_seenplayers_on_court_id", using: :btree
+  add_index "seenplayers", ["user_id"], name: "index_seenplayers_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -153,4 +175,8 @@ ActiveRecord::Schema.define(version: 20160107213357) do
   add_foreign_key "reviews", "users"
   add_foreign_key "runs", "courts"
   add_foreign_key "runs", "users"
+  add_foreign_key "seengames", "courts"
+  add_foreign_key "seengames", "users"
+  add_foreign_key "seenplayers", "courts"
+  add_foreign_key "seenplayers", "users"
 end

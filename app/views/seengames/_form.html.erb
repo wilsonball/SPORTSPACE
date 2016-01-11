@@ -1,0 +1,14 @@
+
+	<div class="col-md-12 price_form">
+		<h3 class="text-center">Here now?</h3>
+		<p class="text-center">How many games back is it right now?</p>
+		<div class="form-group">
+			<%= form_for ([@court, @court.seengames.new]) do |f| %>
+				<%= f.text_field :games, placeholder: "Games Back", class: "form-control" %>
+				<%= f.hidden_field :court_id, value: @court.id %><br>
+				<div class="text-center">
+					<%= f.submit "Submit", class: "btn btn-primary" %>
+				</div>
+			<% end %>
+		</div>
+	</div>

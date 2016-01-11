@@ -2,7 +2,6 @@ class RunsController < ApplicationController
 	before_action :authenticate_user!
 
 	def preload
-		court = Court.find(params[:court_id])
 		today = Date.today
 		runs = court.runs.where("start_time >= ? OR end_time >= ?", today, today)
 
@@ -13,7 +12,23 @@ class RunsController < ApplicationController
 	def create
 		@run = current_user.runs.create(run_params)
 
-		redirect_to @run.court, notice: "Your available time has been set!"
+		if @run.save
+			redirect_to @run.user, notice: "Your available time has been set!"
+		else
+			redirect_to @run.court, notice: "Missing Start or End Time. Please try again!"
+		end
+	end
+
+	def update
+
+	end
+
+	def destroy
+		@run = Run.find(params[:id])
+		court = @run.court
+		@run.destroy
+
+		redirect_to @run.user
 	end
 
 	private
