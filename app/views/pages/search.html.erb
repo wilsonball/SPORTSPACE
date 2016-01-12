@@ -1,14 +1,14 @@
 <%= search_form_for @search, url: search_path do |f| %>
 	<!--search bar-->
 	<div class="row">
+		<div class="col-md-3">
+			<%= text_field_tag :name, params[:name], placeholder: "Name (ex. Maple Hill)", class: "form-control" %>
+		</div>
+		<div class="col-md-3">
+			<%= text_field_tag :address, params[:address], placeholder: "Location (ex. Diamond Bar, CA)", class: "form-control" %>
+		</div>
 		<div class="col-md-4">
-			<%= text_field_tag :name, params[:name], placeholder: "ex. Maple Hill", class: "form-control" %>
-		</div>
-		<div class="col-md-3">
-			<%= text_field_tag :address, params[:address], placeholder: "ex. Diamond Bar, CA", class: "form-control" %>
-		</div>
-		<div class="col-md-3">
-			<%= text_field_tag :time, params[:time], placeholder: "ex. YYYY-DD-MM 00:00", class: "form-control" %>
+			<%= text_field_tag :time, params[:time], placeholder: "Date & Time (ex. YYYY-DD-MM 00:00)", class: "form-control" %>
 		</div>
 		<div class="col-md-2 text-center">
 			<%= f.submit "Search", class: "btn btn-primary" %>
@@ -85,10 +85,12 @@
 			<% @arrCourts.each do |court| %>
 
 				<div class="row">
+					<!--listing-->
 					<div class="row">
 						<div style="float:left;margin-right:5px;">
 							<%= image_tag court.show_first_photo %>
 						</div>
+						<!--listing text-->
 						<div>
 							<span style="font-weight:bold;font-size:18px;color:black!important;"> <%= link_to court.listing_name, court %></span><br>
 							<span id="average_rating"></span><%= court.average_rating %> Stars | <%= court.reviews.count %> Reviews<br>
@@ -110,8 +112,11 @@
 					</div>
 				</div>
 				<hr>
+
 			<% end %>
 		</div>
+		<%= link_to "Don't see your court here? Add it now!", new_court_path %><br>
+		<%= will_paginate @courts, renderer: BootstrapPagination::Rails %>
 	</div>
 
 	<!--gmap-->

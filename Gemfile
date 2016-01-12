@@ -20,6 +20,8 @@ gem 'thin'
 gem 'ransack'
 gem 'pg'
 gem 'aws-sdk', '~> 2.0'
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

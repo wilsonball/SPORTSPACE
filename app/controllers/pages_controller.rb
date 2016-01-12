@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+
   def home
   	@courts = Court.all
   end
@@ -37,7 +38,7 @@ class PagesController < ApplicationController
 
     arrResult = Array.new
 
-  	@courts = @search.result
+  	@courts = @search.result.paginate(:page => params[:page], :per_page => 5)
     # @search_name = @courts_listing_name.ransack(params[:q])
 
   	@arrCourts = @courts.to_a

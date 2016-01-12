@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
 		puts "country"
 	end
 
+  def disable_nav
+    @disable_nav = true
+    
+  end
+
   protected
   	def configure_permitted_parameters
   		devise_parameter_sanitizer.for(:sign_up) << :fullname

@@ -120,13 +120,13 @@
 						</div>
 						<div class="col-md-4">
 							<!--runs form-->
-							<p>
+							<p id="runsform">
 								<%= render 'runs/form' %>
 							</p>
-							<p>
+							<p id="seengamesform">
 								<%= render 'seengames/form' %>
 							</p>
-							<p>
+							<p id="seenplayersform">
 								<%= render 'seenplayers/form' %>
 							</p>
 						</div>
@@ -180,7 +180,7 @@
 					<!--Reviews-->
 					<div class="row">
 						<div class="col-md-8">
-							<h3>Reviews</h3>
+							<h3 id="reviewsform">Reviews</h3>
 								<div>
 									<%= render 'reviews/form' if !@hasReview %>
 								</div>

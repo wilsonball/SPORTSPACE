@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SPORTSPACE</title>
+  <title>collectif | let's get fit, collectively.</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-	<%= render 'shared/navbar' %>
+	<%= render 'shared/navbar' unless @disable_nav %>
 	<%= render 'shared/message' %>
 	<div class="container">
   <%= yield %>
