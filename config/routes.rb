@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :courts do
     resources :reviews, only: [:create, :destroy]
   end
+  resources :suggestions, only: [:new, :create]
 
   get '/preload' => 'runs#preload'
 

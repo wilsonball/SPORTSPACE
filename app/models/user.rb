@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :seengames
   has_many :seenplayers
+  has_many :suggestions
 
   def self.from_omniauth(auth)
   	user = User.where(email: auth.info.email).first

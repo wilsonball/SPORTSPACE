@@ -1,0 +1,6 @@
+<%= form_for @suggestion do |f| %>
+<h4 class="text-center">What does this site need?</h4>
+<%= f.text_field :title, placeholder: "Title", class: "form-control" %>
+<%= f.text_area :comment, placeholder: "Write your suggestion here", class: "form-control" %>
+<%= f.submit class: "btn btn-primary" %>
+<% end %>
