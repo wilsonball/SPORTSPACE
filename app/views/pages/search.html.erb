@@ -102,11 +102,11 @@
 							<% end %>-->
 								<!--seenplayers-->
 								<span style="color:#939393;font-style:italic;"><% court.seenplayers.order("created_at DESC").limit(1).each do |seenplayers| %>
-								<%= seenplayers.players %> players last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %>.
+								<%= seenplayers.players %> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %>.
 								<% end %><br>
 								<!--seengames-->
 								<% court.seengames.order("created_at DESC").limit(1).each do |seengames| %>
-								<%= seengames.games %> games back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %>
+								<%= seengames.games %> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %>
 								<% end %></span>
 						</div>
 					</div>

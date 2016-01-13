@@ -1,7 +1,7 @@
 
 	<div class="col-md-12 price_form">
 		<h3 class="text-center">Here now?</h3>
-		<p class="text-center">How many people are here now?</p>
+		<p class="text-center">How many player(s) are here now?</p>
 		<div class="form-group">
 			<%= form_for ([@court, @court.seenplayers.new]) do |f| %>
 				<%= f.text_field :players, placeholder: "Players Present", class: "form-control" %>

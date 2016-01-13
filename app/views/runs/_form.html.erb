@@ -14,7 +14,6 @@
     </div>
   </div>
   <br>
-  <p class="text-center">UNTIL</p>
 
   <div class="row">
     <div class="col-md-12">
@@ -23,7 +22,7 @@
   </div>
 
 
-  <%= f.hidden_field :court_id, value: @court.id %>
+  <%= f.text_field :court_id, value: @court.id %>
   <%= f.hidden_field :price, value: @court.price %>
   <%= f.hidden_field :total, id: 'run_total' %>
 

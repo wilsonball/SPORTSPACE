@@ -1,11 +1,11 @@
 <% @runs.order("start_time asc").each do |run| %>
 	<div class="row">
 			<div class="col-md-2">
-				<%= image_tag @court.photos[0].image.url(:thumb) %>
+				<%= image_tag run.court.show_first_photo %>
 			</div>
 			<div class="col-md-10">
 				<div class="row">
-					<h5 style="font-weight:bold"><%= link_to @court.listing_name, @court %></h5>
+					<h5 style="font-weight:bold"><%= link_to run.court.listing_name, run.court %></h5>
 					<p>From <%= run.start_time.strftime('%a %m/%d/%y %l:%M %p') %> to <%= run.end_time.strftime('%a %m/%d/%y %l:%M %p') %></p>
 					<!--<p>With # others</p>-->
 				</div>
