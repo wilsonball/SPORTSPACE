@@ -22,7 +22,7 @@
   </div>
 
 
-  <%= f.text_field :court_id, value: @court.id %>
+  <%= f.hidden_field :court_id, value: @court.id %>
   <%= f.hidden_field :price, value: @court.price %>
   <%= f.hidden_field :total, id: 'run_total' %>
 
