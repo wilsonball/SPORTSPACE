@@ -6,7 +6,6 @@ class PagesController < ApplicationController
 
   def search
     @search = Court
-      .where(is_active: true)
       .joins('LEFT OUTER JOIN runs ON runs.court_id = courts.id')
       .select("courts.*, count(runs.id) as num_runs")
       .group("courts.id")
@@ -38,7 +37,7 @@ class PagesController < ApplicationController
 
     arrResult = Array.new
 
-  	@courts = @search.result.paginate(:page => params[:page], :per_page => 5)
+  	@courts = @search.result.paginate(:page => params[:page], :per_page => 5, :total_entries => 500)
     # @search_name = @courts_listing_name.ransack(params[:q])
 
   	@arrCourts = @courts.to_a

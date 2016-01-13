@@ -73,20 +73,6 @@
 									<p>Other</p>
 								</div>
 							</div>
-							<!--<div class="row text-center">
-									<div class="col-sm-3">
-									<h5><em><%= @court.court_type %></em></h5>
-								</div>
-								<div class="col-sm-3">
-									<h5><em><%= @court.court_floor %></em></h5>
-								</div>
-								<div class="col-sm-3">
-									<h5><em><%= @court.court_count %><%= @court.court_count > 1? " Courts" : " Court" %></em></h5>
-								</div>
-								<div class="col-sm-3">
-									<h5><em><%= @court.court_count %><%= @court.court_count > 1? " Courts" : " Court" %></em></h5>
-								</div>										
-							</div>-->
 					</div>
 
 					<!--summary-->
@@ -198,7 +184,7 @@
 							<div class ="col-md-4">
 								<div class="panel panel-default">
 									<div class="panel-heading preview">
-										<%= image_tag court.show_first_photo %>
+										<%= image_tag court.show_first_photo_medium %>
 									</div>
 									<div class="panel-body">
 										<%= link_to court.listing_name, court %><br>

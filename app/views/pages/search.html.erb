@@ -11,7 +11,12 @@
 			<%= text_field_tag :time, params[:time], placeholder: "Date & Time (ex. YYYY-DD-MM 00:00)", class: "form-control" %>
 		</div>
 		<div class="col-md-2 text-center">
-			<%= f.submit "Search", class: "btn btn-primary" %>
+			<%= f.submit "Search", class: "btn btn-primary" %><br>
+
+		<button onclick="getLocation()">Use Current Location</button>
+
+		<p id="demo"></p>
+
 		</div>
 		<!--<div class="col-md-3">
 			<%= f.text_field :price_gteq, placeholder: "Min Price", class: "form-control" %>
@@ -202,4 +207,21 @@ $(function() {
 		});
 	});
 
+</script>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;  
+}
 </script>
