@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :courts
   resources :photos
+  resources :userphotos
   resources :courts do
     resources :runs, only: [:create, :destroy]
   end

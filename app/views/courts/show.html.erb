@@ -13,9 +13,10 @@
 								<% if current_user && current_user == @court.user %>
 									<p><%= link_to "Edit My Listing", edit_court_path%></p>
 								<% else %>
-									<!--<p><%= link_to "Suggest Edits To This Listing", edit_court_path %></p>-->
+									<!--<p><%= link_to "Suggest An Edit", edit_court_path %></p>-->
 								<% end %>
 							<span id="average_rating"></span> (<%= @court.average_rating %> Stars) <%= @reviews.count %> Review(s)
+							<!--Write a review popup window or redirect to write a review area on this page-->
 							<h4><%= @court.address %></h4>					
 							<!--Gmap-->
 							<div class="row">
@@ -25,28 +26,7 @@
 								        width: 100%;
 								        height: 400px;
 								      }
-					    		</style>
-
-								    <script src="https://maps.googleapis.com/maps/api/js"></script>
-								    <script>
-								      function initialize() {
-								        var mapCanvas = document.getElementById('map');
-								        var mapOptions = {
-								          scrollwheel: false,
-								          center: new google.maps.LatLng(<%= @court.latitude %>, <%= @court.longitude %>),
-								          zoom: 14,
-								          mapTypeId: google.maps.MapTypeId.ROADMAP
-								        }
-								        var map = new google.maps.Map(mapCanvas, mapOptions)
-
-								        var marker = new google.maps.Marker({
-								        	position: new google.maps.LatLng(<%= @court.latitude %>, <%= @court.longitude %>), title: "<%= @court.listing_name %>"
-								        });
-
-								        marker.setMap(map);
-								      }
-								      google.maps.event.addDomListener(window, 'load', initialize);
-								    </script>
+					    		</style>								   
 
 								    <div id="map"></div>
 
@@ -161,6 +141,8 @@
 					</div>
 				</div>
 
+				<!--add a photo-->
+
 				<hr>
 
 					<!--Reviews-->
@@ -183,6 +165,7 @@
 						<% for court in @court.nearbys(5).limit(3) %>
 							<div class ="col-md-4">
 								<div class="panel panel-default">
+									<%= link_to court do %>
 									<div class="panel-heading preview">
 										<%= image_tag court.show_first_photo_medium %>
 									</div>
@@ -190,11 +173,8 @@
 										<%= link_to court.listing_name, court %><br>
 										(<%= court.distance.round(2) %> Miles Away)
 									</div>
+									<% end %>
 								</div>
-							</div>
-							<div class ="col-md-4">
-							</div>
-							<div class ="col-md-4">
 							</div>
 						<% end %>
 					</div>
@@ -218,7 +198,7 @@
 	});
 </script>
 
-<script>
+<!--<script>
 $(function(){ // document ready
  
   if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
@@ -241,4 +221,26 @@ $(function(){ // document ready
   }
  
 });
+</script>-->
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+
+<script>
+  function initialize() {
+    var mapCanvas = document.getElementById('map');
+    var mapOptions = {
+      scrollwheel: false,
+      center: new google.maps.LatLng(<%= @court.latitude %>, <%= @court.longitude %>),
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(mapCanvas, mapOptions)
+
+    var marker = new google.maps.Marker({
+    	position: new google.maps.LatLng(<%= @court.latitude %>, <%= @court.longitude %>), title: "<%= @court.listing_name %>"
+    });
+
+    marker.setMap(map);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
 </script>

@@ -3,7 +3,11 @@
 	
 		<div id="user_stars"></div>
 		<br>
+		<% if @court.reviews.count > 0 %>
 		<%= f.text_area :comment, placeholder: 'Write your review here.', class: "form-control", rows: 5 %>
+		<% else %>
+		<%= f.text_area :comment, placeholder: 'Write the first review!', class: "form-control", rows: 5 %>
+		<% end %>
 		<%= f.hidden_field :court_id, value: @court.id %>
 
 	<br>

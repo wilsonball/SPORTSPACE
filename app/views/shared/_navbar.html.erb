@@ -24,21 +24,38 @@
                   <%= current_user.fullname %><span class="caret"></span></a>
                 <!--dropdown menu-->
                 <ul class="dropdown-menu">
-                  <li><%= link_to "My Profile", user_path(current_user.id) %></a></li>
-                  <li><a href="#">Nearby Courts</a></li>
-                  <li><%= link_to "Edit Profile", edit_user_registration_path %></a></li>
+                  <li>
+                    <%= link_to user_path(current_user.id) do %>
+                    <i class="fa fa-user"></i> &nbsp;&nbsp;My Profile
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to courts_path do %>
+                    <i class="fa fa-bolt"></i> &nbsp;&nbsp;My Activity
+                    <% end %>
+                  </li>
+                  <!--<li><a href="#">Nearby Courts</a></li>-->        
+                  <li>
+                    <%= link_to conversations_path do %>
+                    <i class="fa fa-envelope-o"></i> &nbsp;&nbsp;Messages
+                    <% end %>
+                  </li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Account Settings</a></li>
-                  <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></a></li>
+                  <!--<li><a href="#">Account Settings</a></li>-->
+                  <li>
+                    <%= link_to edit_user_registration_path do %>
+                    <i class="fa fa-pencil"></i> &nbsp;&nbsp;Edit Profile
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to destroy_user_session_path, method: :delete do %>
+                    <i class="fa fa-power-off"></i> &nbsp;&nbsp;Log Out
+                    <% end %>
+                  </li>
                 </ul>                
               </li>
             <% end %>
             <!--messages-->
-            <li>
-              <%= link_to conversations_path do %>
-              <i class="fa fa-envelope-o"></i> Messages
-              <% end %>
-            </li>
             <!--list a court-->
             <li>
               <%= link_to new_court_path do %>

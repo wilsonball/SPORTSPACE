@@ -4,19 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_location
 
-  def set_location
-	  city = request.location.city
-		country = request.location.country_code
-
-		puts "city"
-		puts "country"
-	end
 
   def disable_nav
-    @disable_nav = true
-    
+    @disable_nav = true   
   end
 
   protected
