@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114011341) do
+ActiveRecord::Schema.define(version: 20160115032149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,13 @@ ActiveRecord::Schema.define(version: 20160114011341) do
     t.string   "rim_type"
     t.string   "rim_height"
     t.string   "backboard"
+    t.integer  "halfcourtcount"
+    t.integer  "fullcourtcount"
+    t.string   "streetaddress"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
   end
 
   add_index "courts", ["user_id"], name: "index_courts_on_user_id", using: :btree
@@ -182,6 +189,8 @@ ActiveRecord::Schema.define(version: 20160114011341) do
     t.string   "image"
     t.string   "phone_number"
     t.text     "description"
+    t.string   "firstname"
+    t.string   "lastname"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

@@ -14,6 +14,7 @@
 			<div class="col-md-4">
 				<%= text_field_tag :address, params[:address], placeholder: "Location (ex. Diamond Bar, CA)", class: "form-control" %>
 			</div>
+			<button type="button" id="use-location-button">Use my location</button>
 			<!--<div class="col-md-4">
 				<%= text_field_tag :time, params[:time], placeholder: "ex. YYYY-MM-DD 00:00", readonly: true, class: "form-control" %>
 			</div>-->
@@ -26,21 +27,6 @@
 	</div>
 </div>
 <br>
-<!--<div class="row">
-	<% @courts.each do |court| %>
-
-		<div class="col-md-4">
-			<div class="panel panel-defult">
-				<div class="panel-heading preview">
-					<%= image_tag court.photos[0].image.url(:medium) if court.photos.length > 0 %>
-				</div>
-				<div class="panel-body">
-					<%= link_to court.listing_name, court %>
-				</div>
-			</div>
-		</div>
-	<% end %>
-</div>-->
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -52,4 +38,19 @@
 		});
 	});
 
+</script>
+
+<script>
+$('#use-location-button').on('click', function() {
+ 		function onSuccess(location) {
+ 			var coords = location.coords.latitude + ","  location.coords.longitude;
+ 			$('#address').val(coords);
+ 		}
+ 
+ 		function onError(err) {
+ 			alert("Error getting location: " + err.code);
+ 		}
+ 
+ 		navigator.geolocation.getCurrentPosition(onSuccess, onError);
+ 	});
 </script>

@@ -1,5 +1,10 @@
 class ReviewsController < ApplicationController
 
+	def index
+		@reviews = Review.all
+		
+	end
+
 	def create
 		@review = current_user.reviews.create(review_params)
 		if @review.save

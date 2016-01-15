@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :create]
   end
   resources :courts do
-    resources :reviews, only: [:create, :destroy]
+    resources :reviews
   end
   resources :suggestions, only: [:new, :create]
 

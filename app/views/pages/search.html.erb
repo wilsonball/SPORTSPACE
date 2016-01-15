@@ -99,19 +99,17 @@
 						<div>
 							<span style="font-weight:bold;font-size:18px;color:black!important;"> <%= link_to court.listing_name, court %></span><br>
 							<span id="average_rating"></span><%= court.average_rating %> Stars | <%= court.reviews.count %> Reviews<br>
-							<%= court.address %><br>
-							<!--<% if params[:time].present? && params[:time].strip != "" %>
+							<%= court.streetaddress %> <%= court.city %>, <%= court.state %> <%= court.zip %><br>
+							<% if params[:time].present? && params[:time].strip != "" %>
 							<p><%= court.num_runs %> person(s) Playing Here @ <%= params[:time] %></p>
-							<% else %>
-							<p><%= court.num_runs %> person(s) scheduled to play here.</p>
-							<% end %>-->
+							<% end %>
 								<!--seenplayers-->
 								<span style="color:#939393;font-style:italic;"><% court.seenplayers.order("created_at DESC").limit(1).each do |seenplayers| %>
-								<%= seenplayers.players %> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %>.
+								<%= seenplayers.players %> player(s) last seen @ <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %>.
 								<% end %><br>
 								<!--seengames-->
 								<% court.seengames.order("created_at DESC").limit(1).each do |seengames| %>
-								<%= seengames.games %> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %>
+								<%= seengames.games %> game(s) back last reported @ <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %>
 								<% end %></span>
 						</div>
 					</div>
@@ -119,10 +117,11 @@
 				<hr>
 
 			<% end %>
-		</div>
 		<%= link_to "Don't see your court here? Add it now!", new_court_path %><br>
 		<%= will_paginate @courts, renderer: BootstrapPagination::Rails %>
+		</div>
 	</div>
+
 
 	<!--gmap-->
 	<div class="col-md-6">
@@ -140,7 +139,7 @@
 						          scrollwheel: false,
 						          zoom: 12,
 						          mapTypeId: google.maps.MapTypeId.ROADMAP
-						        }
+						        };
 						        var map = new google.maps.Map(mapCanvas, mapOptions);
 
 						        <% @arrCourts.each do |court| %>
@@ -148,17 +147,18 @@
 							        	position: new google.maps.LatLng(<%= court.latitude %>, <%= court.longitude %>),
 							        	title: "<%= court.listing_name %>"
 							        });
+							        marker.addListener('click', function() {
+										    infowindow.open(map, marker);
+										  });
+										  var infowindow = new google.maps.InfoWindow({
+										    content: contentString
+										  });
+										  var contentString = "<%= court.listing_name %><br><%= court.address %>"
 
 							        marker.setMap(map);
 
-
+							        
 						        <% end %>
-
-						        var contentString = "asdf"
-
-									  var infowindow = new google.maps.InfoWindow({
-									    content: contentString
-									  });
 									  marker.addListener('click', function() {
 									    infowindow.open(map, marker);
 									  });
@@ -203,7 +203,6 @@ $(function() {
 		$('#time').datetimepicker({
 				formatTime:'g:i a',
         minDate: 0,
-        minTime: 0,
 		});
 	});
 

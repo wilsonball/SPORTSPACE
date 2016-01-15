@@ -14,10 +14,29 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<!--<div class="row">
 					<div class="col-md-12 form-group">
 						<%= f.text_field :address, placeholder: "Address", class: "form-control" %>
 					</div>
+				</div>-->
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<%= f.text_field :streetaddress, placeholder: "Street Address", class: "form-control" %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<%= f.text_field :city, placeholder: "City", class: "form-control" %>
+					</div>
+					<div class="col-md-3 form-group">
+						<%= f.text_field :state, placeholder: "State", class: "form-control" %>
+					</div>
+					<div class="col-md-3 form-group">
+						<%= f.text_field :zip, placeholder: "Zip Code", class: "form-control" %>
+					</div>
+					<!--<div class="col-md-3 form-group">
+						<%= f.text_field :country, placeholder: "Country", class: "form-control" %>
+					</div>-->
 				</div>
 
 				<div class="row">
@@ -30,19 +49,24 @@
 
 				<div class="row">
 					<h2 class="text-center">Floor & Hoop</h2>
-					<div class="col-md-4 select">
+					<div class="col-md-3 select">
 						<div class="form-group">
 							<%= f.select :court_type, [["Outdoor","Outdoor"], ["Covered Outdoor", "Covered Outdoor"], ["Indoor","Indoor"]], id: "court_type", prompt: "Court Type", class: "form-control" %>
 						</div>
 					</div>
-					<div class="col-md-4 select">
+					<div class="col-md-3 select">
 						<div class="form-group">
 							<%= f.select :court_floor, [["Hardwood","Hardwood"], ["Colored Cement","Colored Cement"], ["Blacktop Cement","Blacktop Cement"]], prompt: "Floor Type", class: "form-control" %>
 						</div>
 					</div>
-					<div class="col-md-4 select">
+					<div class="col-md-3 select">
 						<div class="form-group">
-							<%= f.select :court_count, [["0.5", 0.5], ["1",1], ["1.5",1.5], ["2",2], ["2.5",2.5], ["3",3]], prompt: "# of Courts", class: "form-control" %>
+							<%= f.select :fullcourtcount, [["0",0], ["1", 1], ["2",2], ["3",3], ["4",4], ["5",5]], prompt: "Full Courts",class: "form-control" %>
+						</div>
+					</div>
+					<div class="col-md-3 select">
+						<div class="form-group">
+							<%= f.select :halfcourtcount, [["0",0], ["1", 1], ["2",2], ["3",3], ["4",4], ["5",5]], prompt: "Half Courts",class: "form-control" %>
 						</div>
 					</div>
 				</div>

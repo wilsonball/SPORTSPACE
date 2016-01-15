@@ -1,5 +1,6 @@
 class Userphoto < ActiveRecord::Base
   belongs_to :user
+  before_save :set_name
 
   has_attached_file :image, 
   styles: { 
@@ -8,5 +9,6 @@ class Userphoto < ActiveRecord::Base
   	listing: "100x100#" 
   }
 
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+    validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+    
 end

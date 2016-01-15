@@ -353,3 +353,9 @@ hr {
 .form-control[readonly] {
 	background-color:white;
 }
+
+/* resize carousel image */
+.carousel-inner > .item > img {
+	height:200px;
+	width:100%;
+}

@@ -4,8 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable
+  before_save :fullname 
 
-  validates :fullname, presence: true, length: {maximum: 50}
+  validates :firstname, presence: true, length: {maximum: 50}
+  validates :lastname, presence: true, length: {maximum: 50}
 
   has_many :courts
   has_many :runs
@@ -15,6 +17,10 @@ class User < ActiveRecord::Base
   has_many :seengames
   has_many :seenplayers
   has_many :suggestions
+
+  def fullname
+    fullname = "#{firstname} #{lastname}"
+  end
 
   def self.from_omniauth(auth)
   	user = User.where(email: auth.info.email).first

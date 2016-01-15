@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
 
   def home
-  	@courts = Court.all
   end
 
   def search
@@ -11,11 +10,18 @@ class PagesController < ApplicationController
       .group("courts.id")
   	if params[:address].present? && params[:address].strip != ""
       #puts "adding address search"
-  		@search = @search
-        .near(params[:address], 5, order: 'distance')
-      result = request.location
-      puts "result"
-      myIP = "73.15.91.27"
+  		#@search = @search
+      #  .near(params[:address], 5, order: 'distance')
+      #result = request.location
+      #puts "result"
+      #myIP = "73.15.91.27"
+      if params[:address] =~ /-?\d+(\.\d+)?,-?\d+(\.\d+)?/
+        location = params[:address].split(',').map{|num| Float(num)}
+      else
+        location = params[:address]
+      end
+
+      @search = @search.near(location, 5, order: 'distance')
 
   	end
 

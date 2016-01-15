@@ -1,4 +1,6 @@
 class Court < ActiveRecord::Base
+	before_save :address
+
 	belongs_to :user
 	has_many :photos
 	has_many :runs
@@ -10,7 +12,15 @@ class Court < ActiveRecord::Base
 	after_validation :geocode, if: :address_changed?
 
 	validates :listing_name, presence: true, length: {maximum: 50}
-	validates :address, presence: true
+	validates :streetaddress, presence: true, length: {maximum: 50}
+	validates :city, presence: true, length: {maximum: 50}
+	validates :state, presence: true, length: {maximum: 50}
+	validates :zip, presence: true, length: {maximum: 20}
+
+
+	def address
+    address = "#{streetaddress} #{city}, #{state} #{zip}"
+  end
 
 	def average_rating
 		reviews.count == 0 ? 0 : reviews.average(:star).round(2)
@@ -20,7 +30,7 @@ class Court < ActiveRecord::Base
 		if photos.length == 0
 			'http://www.mckearneyasphalt.com/images/basketball-court/basketball-court-construction-2-thumb.jpg'
 		else
-			photos[0].image.url(:thumb)
+			photos[0].image.url(:listing)
 		end
 	end
 

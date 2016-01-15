@@ -1,23 +1,22 @@
 <div class="panel panel-default">
-
 	<div class="panel-body">
 		<div class="col-md-12">
 		<!--Main Info-->
 				<!--court info-->
 				<div class="row">
-
 					<!--listing name/address-->
 					<div class="row">					
 						<div class="col-md-8">
 							<h2><strong><%= @court.listing_name %></strong></h2>
 								<% if current_user && current_user == @court.user %>
-									<p><%= link_to "Edit My Listing", edit_court_path%></p>
+									<%= link_to "Edit My Listing", edit_court_path%><br>
 								<% else %>
 									<!--<p><%= link_to "Suggest An Edit", edit_court_path %></p>-->
 								<% end %>
-							<span id="average_rating"></span> (<%= @court.average_rating %> Stars) <%= @reviews.count %> Review(s)
+							<span id="average_rating"></span> (<%= @court.average_rating %> Stars) <%= @reviews.count %> Review(s)<br>
 							<!--Write a review popup window or redirect to write a review area on this page-->
-							<h4><%= @court.address %></h4>					
+							<%= @court.streetaddress %><br>
+								<%= @court.city %>, <%= @court.state %> <%= @court.zip %>		
 							<!--Gmap-->
 							<div class="row">
 								<div class="col-md-12">
@@ -35,22 +34,30 @@
 												<!--icons-->
 					<div class="col-md-12">
 						<div class="row text-center row-space-3">
+							<% if @court.court_type != "Outdoor" %>
 								<div class="col-sm-3">
-									<i class="fa fa-home fa-2x"></i>
+									<i class="fa fa-lightbulb-o fa-2x"></i>
 									<p><%= @court.court_type %> Court</p>
 									<p>
 								</div>
+							<% else %>
+								<div class="col-sm-3">
+									<i class="fa fa-sun-o fa-2x"></i>
+									<p><%= @court.court_type %> Court</p>
+									<p>
+								</div>
+							<% end %>
 								<div class="col-sm-3">
 									<i class="fa fa-users fa-2x"></i>
 									<p>People Played Here</p>
 								</div>
 								<div class="col-sm-3">
-									<i class="fa fa-bed fa-2x"></i>
-									<p><%= @court.court_count %> Court(s)</p>
+									<i class="fa fa-star fa-2x"></i>
+									<p><%= @court.fullcourtcount %> Full Court(s)</p>
 								</div>
 								<div class="col-sm-3">
-									<i class="fa fa-ship fa-2x"></i>
-									<p>Other</p>
+									<i class="fa fa-star-half fa-2x"></i>
+									<p><%= @court.halfcourtcount %> Half Court(s)</p>
 								</div>
 							</div>
 					</div>
@@ -67,24 +74,93 @@
 					<h3>Court Features</h3>				
 					<div class"row">
 							<div class="col-md-12">
-								<div class="col-md-6 pull-left">
+								<div class="col-md-6">
 									<ul class="amenities">
-										<li class="<%= 'text-line-through' if !@court.is_3pt %>">3PT</li>
-										<li class="<%= 'text-line-through' if !@court.is_ncaa3pt %>">NCAA 3PT</li>
-										<li class="<%= 'text-line-through' if !@court.is_nba3pt %>">NBA 3PT</li>
+										<li><% if !@court.is_3pt %>
+											<i class="fa fa-square-o"></i> 3PT
+										<% else %>
+											<i class="fa fa-check-square-o"></i> 3PT
+										<% end %></li>
+										<li><% if !@court.is_ncaa3pt %>
+											<i class="fa fa-square-o"></i> NCAA 3PT
+										<% else %>
+											<i class="fa fa-check-square-o"></i> NCAA 3PT
+										<% end %></li>
+										<li><% if !@court.is_nba3pt %>
+											<i class="fa fa-square-o"></i> NBA 3PT
+										<% else %>
+											<i class="fa fa-check-square-o"></i> NBA 3PT
+										<% end %></li>
 								</div>
 								<div class="col-md-6">
 									<ul class="amenities">
-										<li class="<%= 'text-line-through' if !@court.is_centercircle %>">Center Circle</li>
-										<li class="<%= 'text-line-through' if !@court.is_key %>">Key</li>
-										<li class="<%= 'text-line-through' if !@court.is_freethrowline %>">Free Throw Line</li>
+										<li><% if !@court.is_centercircle %>
+											<i class="fa fa-square-o"></i> Center Circle
+										<% else %>
+											<i class="fa fa-check-square-o"></i> Center Circle
+										<% end %></li>
+										<li><% if !@court.is_key %>
+											<i class="fa fa-square-o"></i> Key
+										<% else %>
+											<i class="fa fa-check-square-o"></i> Key
+										<% end %></li>
+										<li><% if !@court.is_freethrowline %>
+											<i class="fa fa-square-o"></i> Free Throw Line
+										<% else %>
+											<i class="fa fa-check-square-o"></i> Free Throw Line
+										<% end %></li>
 									</ul>
 								</div>
 							</div>					
 					</div>
+					<h3 id="reviewsform">Reviews</h3>
+						<div>
+							<%= render 'reviews/form' if !@hasReview %>
+						</div>
+
+						<div id="reviews">
+							<%= render 'reviews/review' %>
+						</div>
+							
 
 						</div>
 						<div class="col-md-4">
+							<!--Carousel-->
+							<div class="row">
+								<div class="col-md-12">
+									<div id="myCarousel" class="carousel slide" data-ride="carousel">
+									  <!-- Indicators -->
+									  <% if @photos %>				  
+										  <ol class="carousel-indicators">
+										  	<% @photos.each do |photo| %>
+										    	<li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
+										    <% end %>
+										  </ol>
+									  <% end %>
+
+									  <!-- Wrapper for slides -->
+									  <div class="carousel-inner" role="listbox">
+									  	<% if @photos %>
+									  	  <% @photos.each do |photo| %>
+									    	<div class="item <%= 'active' if photo.id == @photos[0].id %>">
+									      		<%= image_tag photo.image.url() %>
+									    	</div>
+									      <% end %>
+									    <% end %>
+									    </div>			    
+
+									  <!-- Left and right controls -->
+									  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+									    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									    <span class="sr-only">Previous</span>
+									  </a>
+									  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+									    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+									    <span class="sr-only">Next</span>
+									  </a>
+									</div>
+								</div>
+							</div>
 							<!--runs form-->
 							<p id="runsform">
 								<%= render 'runs/form' %>
@@ -102,62 +178,11 @@
 							<%= @court.user.fullname %>
 						</div>-->
 					</div>
-					<br>
-
-					<!--Carousel-->
-				<div class="row">
-					<div class="col-md-12">
-						<div id="myCarousel" class="carousel slide" data-ride="carousel">
-						  <!-- Indicators -->
-						  <% if @photos %>				  
-							  <ol class="carousel-indicators">
-							  	<% @photos.each do |photo| %>
-							    	<li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
-							    <% end %>
-							  </ol>
-						  <% end %>
-
-						  <!-- Wrapper for slides -->
-						  <div class="carousel-inner" role="listbox">
-						  	<% if @photos %>
-						  	  <% @photos.each do |photo| %>
-						    	<div class="item <%= 'active' if photo.id == @photos[0].id %>">
-						      		<%= image_tag photo.image.url() %>
-						    	</div>
-						      <% end %>
-						    <% end %>
-						    </div>			    
-
-						  <!-- Left and right controls -->
-						  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-						    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						    <span class="sr-only">Previous</span>
-						  </a>
-						  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-						    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						    <span class="sr-only">Next</span>
-						  </a>
-						</div>
-					</div>
-				</div>
+					<br>					
 
 				<!--add a photo-->
 
-				<hr>
-
-					<!--Reviews-->
-					<div class="row">
-						<div class="col-md-8">
-							<h3 id="reviewsform">Reviews</h3>
-								<div>
-									<%= render 'reviews/form' if !@hasReview %>
-								</div>
-								<div>
-									<%= render 'reviews/list' %>
-								</div>
-							
-						</div>
-					</div>
+				<hr>		
 
 					<!--Closeby-->
 					<h3>Nearby Courts</h3>
