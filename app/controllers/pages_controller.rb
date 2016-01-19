@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   	if params[:address].present? && params[:address].strip != ""
       #puts "adding address search"
   		@search = @search
-        .near(params[:address], 5, order: 'distance')
+        .near(params[:address], 25, order: 'distance')
       #result = request.location
       #puts "result"
       #myIP = "73.15.91.27"
