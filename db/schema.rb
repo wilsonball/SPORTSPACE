@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115032149) do
+ActiveRecord::Schema.define(version: 20160115195751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,20 @@ ActiveRecord::Schema.define(version: 20160115032149) do
     t.string   "state"
     t.string   "zip"
     t.string   "country"
+    t.time     "monopentime"
+    t.time     "monclosetime"
+    t.time     "tuesopentime"
+    t.time     "tuesclosetime"
+    t.time     "wedopentime"
+    t.time     "wedclosetime"
+    t.time     "thursopentime"
+    t.time     "thursclosetime"
+    t.time     "friopentime"
+    t.time     "friclosetime"
+    t.time     "satopentime"
+    t.time     "satclosetime"
+    t.time     "sunopentime"
+    t.time     "sunclosetime"
   end
 
   add_index "courts", ["user_id"], name: "index_courts_on_user_id", using: :btree

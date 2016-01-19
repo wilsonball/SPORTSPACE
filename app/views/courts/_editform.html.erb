@@ -14,11 +14,11 @@
 					</div>
 				</div>
 
-				<!--<div class="row">
+				<div class="row">
 					<div class="col-md-12 form-group">
-						<%= f.text_field :address, placeholder: "Address", class: "form-control" %>
+						<%= f.hidden_field :address, value: "#{@court.streetaddress} #{@court.city}, #{@court.state} #{@court.zip}", placeholder: "Address", class: "form-control" %>
 					</div>
-				</div>-->
+				</div>
 				<div class="row">
 					<div class="col-md-12 form-group">
 						<%= f.text_field :streetaddress, placeholder: "Street Address", class: "form-control" %>
@@ -43,6 +43,48 @@
 					<div class="col-md-12 form-group">
 						<%= f.text_area :summary, rows: 5, placeholder: "Describe this court as best as possible.", class: "form-control" %>
 					</div>
+				</div>
+
+				<hr>
+
+				<div class="row">
+					<h2 class="text-center">Open Gym Hours</h2>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-3">Monday</div>
+						<div style="float:left"><%= f.text_field :monopentime, placeholder: "Open", class: "openclosetime openhourfield", readonly: true %></div>
+						<div style="float:left"><%= f.text_field :monclosetime, placeholder: "Close", class: "openclosetime openhourfield", readonly: true %></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-3">Tuesday</div>
+						<div style="float:left"><%= f.text_field :tuesopentime, placeholder: "Open", class: "openclosetime openhourfield", readonly: true %></div>
+						<div style="float:left"><%= f.text_field :tuesclosetime, placeholder: "Close", class: "openclosetime openhourfield", readonly: true %></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-3">Wednesday</div>
+						<div style="float:left"><%= f.text_field :wedopentime, placeholder: "Open", class: "openclosetime openhourfield", readonly: true %></div>
+						<div style="float:left"><%= f.text_field :wedclosetime, placeholder: "Close", class: "openclosetime openhourfield", readonly: true %></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-3">Thursday</div>
+						<div style="float:left"><%= f.text_field :thursopentime, placeholder: "Open", class: "openclosetime openhourfield", readonly: true %></div>
+						<div style="float:left"><%= f.text_field :thursclosetime, placeholder: "Close", class: "openclosetime openhourfield", readonly: true %></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-3">Friday</div>
+						<div style="float:left"><%= f.text_field :friopentime, placeholder: "Open", class: "openclosetime openhourfield", readonly: true %></div>
+						<div style="float:left"><%= f.text_field :friclosetime, placeholder: "Close", class: "openclosetime openhourfield", readonly: true %></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-3">Saturday</div>
+						<div style="float:left"><%= f.text_field :satopentime, placeholder: "Open", class: "openclosetime openhourfield", readonly: true %></div>
+						<div style="float:left"><%= f.text_field :satclosetime, placeholder: "Close", class: "openclosetime openhourfield", readonly: true %></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-3">Sunday</div>
+						<div style="float:left"><%= f.text_field :sunopentime, placeholder: "Open", class: "openclosetime openhourfield", readonly: true %></div>
+						<div style="float:left"><%= f.text_field :sunclosetime, placeholder: "Close", class: "openclosetime openhourfield", readonly: true %></div>
+					</div>
+
 				</div>
 
 				<hr>
@@ -171,3 +213,11 @@
 		</div>
 	</div>
 </div>
+
+<script>
+jQuery('.openclosetime').datetimepicker({
+  datepicker:false,
+  formatTime:'g:i a',
+  format:'g:i a'
+});
+</script>

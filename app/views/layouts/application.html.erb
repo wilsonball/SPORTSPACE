@@ -11,7 +11,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  
+  <%= render 'shared/homenav' unless @disable_homenav %>
 	<%= render 'shared/navbar' unless @disable_nav %>
 	<%= render 'shared/message' %>
 	<div class="container">

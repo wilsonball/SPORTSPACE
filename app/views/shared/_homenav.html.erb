@@ -11,12 +11,6 @@
           <p class="navbar-brand">collectif α</p>
           <% end %>
         </div>
-          <%= form_tag search_path, class: "navbar-form navbar-left", method: :get do |f| %>
-            <div class="form-group">
-              <%= text_field_tag :address, params[:address], placeholder: "Search Location (ex. Diamond Bar, CA)", class: "form-control" %>
-              <%= submit_tag "Search", style: "display:none;" %>
-            </div>
-          <% end %>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
 

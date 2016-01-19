@@ -71,7 +71,12 @@ class CourtsController < ApplicationController
     end
 
     def court_params
-      params.required(:court).permit(:court_type, :court_floor, :halfcourtcount, :fullcourtcount, :listing_name, :summary, :streetaddress, :city, :state, :zip, :country, :is_3pt, :is_ncaa3pt, :is_nba3pt, :is_centercircle, :is_key, :is_freethrowline, :rim_type, :rim_height, :backboard, :price, :is_active)
+      params.required(:court).permit(:court_type, :court_floor, :halfcourtcount, :fullcourtcount, :listing_name, :summary, :address, :streetaddress, :city, :state, :zip, :country, :is_3pt, :is_ncaa3pt, :is_nba3pt, :is_centercircle, :is_key, :is_freethrowline, :rim_type, :rim_height, :backboard, :openclosedtime, :price, :is_active)
+    end
+
+    def openclosedtime
+      openclosedtime = :monopentime, :monclosetime, :tuesopentime, :tuesclosetime, :wedopentime, :wedclosetime, :thursopentime, :thursclosetime, :friopentime, :friclosetime, :satopentime, :satclosetime, :sunopentime, :sunclosetime
+      
     end
 
     

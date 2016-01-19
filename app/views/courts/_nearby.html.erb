@@ -1,0 +1,18 @@
+<h3>Nearby Courts</h3>
+					<div class="row">
+						<% for court in @court.nearbys(5).limit(3) %>
+							<div class ="col-md-4">
+								<div class="panel panel-default">
+									<%= link_to court do %>
+									<div class="panel-heading preview">
+										<%= image_tag court.show_first_photo_medium %>
+									</div>
+									<div class="panel-body">
+										<%= link_to court.listing_name, court %><br>
+										(<%= court.distance.round(2) %> Miles Away)
+									</div>
+									<% end %>
+								</div>
+							</div>
+						<% end %>
+					</div>

@@ -359,3 +359,43 @@ hr {
 	height:200px;
 	width:100%;
 }
+
+.facebook-button {
+	border: 1px solid #3B5998;
+	background-color: #3B5998;
+	color: white;
+}
+
+.btn .facebook-button a:hover {
+	border: 1px solid #3B5998;
+	background-color: #ea4c89;
+	color: white;
+}
+
+.google-button {
+	border: 1px solid #db3236;
+	background-color: #db3236;
+	color: white;
+}
+
+.navbar-search {
+	
+	
+}
+
+.openhourfield {
+	width: 80px;
+	border-radius: 4px;
+}
+
+.signupbutton {
+	border: 1px solid #FA8320;
+	border-radius: 4px;
+	background-color: #FA8320;
+	color: white!important;
+	height: 30px;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color:#white;
+}
