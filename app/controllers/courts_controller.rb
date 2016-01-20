@@ -67,7 +67,7 @@ class CourtsController < ApplicationController
 
   private
     def set_court
-      @court = Court.friendly.find(params[:id])
+      @court = Court.find(params[:id])
     end
 
     def court_params
