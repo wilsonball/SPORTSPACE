@@ -1,10 +1,6 @@
 class Court < ActiveRecord::Base
 	before_save :address
 
-	extend FriendlyId
-		friendly_id [:listing_name, :city], use: :slugged
-
-
 	belongs_to :user
 	has_many :photos
 	has_many :runs
