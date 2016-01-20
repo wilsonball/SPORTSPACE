@@ -3,7 +3,7 @@ class Court < ActiveRecord::Base
 
 	extend FriendlyId
 		friendly_id [:listing_name, :city], use: :slugged
-	end
+
 
 	belongs_to :user
 	has_many :photos
