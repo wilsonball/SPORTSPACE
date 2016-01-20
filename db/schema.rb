@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120032901) do
+ActiveRecord::Schema.define(version: 20160120043044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20160120032901) do
     t.string   "court_floor"
     t.integer  "court_count"
     t.string   "listing_name"
-    t.string   "address"
     t.text     "summary"
     t.boolean  "is_3pt"
     t.boolean  "is_ncaa3pt"

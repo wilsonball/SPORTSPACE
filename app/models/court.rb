@@ -13,7 +13,7 @@ class Court < ActiveRecord::Base
 	has_many :seengames
 
 	geocoded_by :address
-	after_validation :geocode, if: :address_changed?
+	after_validation :geocode, if: :streetaddress_changed? || :city_changed? || :state_changed? || :zip_changed?
 
 	validates :listing_name, presence: true, length: {maximum: 50}
 	validates :streetaddress, presence: true, length: {maximum: 50}
@@ -30,7 +30,7 @@ class Court < ActiveRecord::Base
 		reviews.count == 0 ? 0 : reviews.average(:star).round(2)
 	end
 
-	def show_first_photo 
+	def show_first_photo
 		if photos.length == 0
 			'http://www.mckearneyasphalt.com/images/basketball-court/basketball-court-construction-2-thumb.jpg'
 		else

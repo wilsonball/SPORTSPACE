@@ -11,7 +11,7 @@ class CourtsController < ApplicationController
     @photos = @court.photos
 
     @reviews = @court.reviews
-    
+
   end
 
   def new
@@ -58,7 +58,7 @@ class CourtsController < ApplicationController
         params[:images].each do |image|
           @court.photos.create(image: image)
         end
-      end  
+      end
       redirect_to court_path, notice: "Updated!"
     else
       render :edit, notice: "Update failed. Please try again."
@@ -71,13 +71,13 @@ class CourtsController < ApplicationController
     end
 
     def court_params
-      params.required(:court).permit(:court_type, :court_floor, :halfcourtcount, :fullcourtcount, :listing_name, :summary, :address, :streetaddress, :city, :state, :zip, :country, :is_3pt, :is_ncaa3pt, :is_nba3pt, :is_centercircle, :is_key, :is_freethrowline, :rim_type, :rim_height, :backboard, :openclosedtime, :price, :is_active)
+      params.required(:court).permit(:court_type, :court_floor, :halfcourtcount, :fullcourtcount, :listing_name, :summary, :streetaddress, :city, :state, :zip, :country, :is_3pt, :is_ncaa3pt, :is_nba3pt, :is_centercircle, :is_key, :is_freethrowline, :rim_type, :rim_height, :backboard, :openclosedtime, :price, :is_active)
     end
 
     def openclosedtime
       openclosedtime = :monopentime, :monclosetime, :tuesopentime, :tuesclosetime, :wedopentime, :wedclosetime, :thursopentime, :thursclosetime, :friopentime, :friclosetime, :satopentime, :satclosetime, :sunopentime, :sunclosetime
-      
+
     end
 
-    
+
 end
