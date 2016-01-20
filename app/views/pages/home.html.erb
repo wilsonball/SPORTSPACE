@@ -52,21 +52,3 @@
 	});
 
 </script>
-
-<script>
-
-function getLocation() {
-    if (navigator.geolocation) {
- 
- 		navigator.geolocation.getCurrentPosition(onSuccess, onError);
-$('#use-location-button').on('click', function() {
- 		function onSuccess(location) {
- 			var coords = position.coords.latitude + ","  position.coords.longitude;
- 			$('#address').val(coords);
- 		}
- 
- 		function onError(err) {
- 			alert("Error getting location: " + err.code);
- 		}
- 	});
-</script>

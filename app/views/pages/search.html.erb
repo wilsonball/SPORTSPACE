@@ -207,18 +207,17 @@ $(function() {
 
 <script>
 
-function getLocation() {
-    if (navigator.geolocation) {
- 
- 		navigator.geolocation.getCurrentPosition(onSuccess, onError);
 $('#use-location-button').on('click', function() {
- 		function onSuccess(location) {
- 			var coords = position.coords.latitude + ","  position.coords.longitude;
- 			$('#address').val(coords);
- 		}
- 
- 		function onError(err) {
- 			alert("Error getting location: " + err.code);
- 		}
- 	});
+		function onSuccess(location) {
+			var coords = location.coords.latitude + "," + location.coords.longitude;
+			$('#address').val(coords);
+		}
+
+		function onError(err) {
+			alert("Error getting location: " + err.code);
+		}
+
+		navigator.geolocation.getCurrentPosition(onSuccess, onError);
+	});
+
 </script>
