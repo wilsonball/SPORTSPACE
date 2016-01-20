@@ -1,3 +1,4 @@
+
 <%= search_form_for @search, url: search_path do |f| %>
 	<!--search bar-->
 	<div class="row">
@@ -11,7 +12,8 @@
 			<%= text_field_tag :time, params[:time], placeholder: "Date & Time (ex. YYYY-DD-MM 00:00)", class: "form-control" %>
 		</div>
 		<div class="col-md-2 text-center">
-			<%= f.submit "Search", class: "btn btn-primary" %>
+			<%= f.submit "Search", class: "btn btn-primary" %><br>
+
 		</div>
 		<!--<div class="col-md-3">
 			<%= f.text_field :price_gteq, placeholder: "Min Price", class: "form-control" %>
@@ -95,18 +97,16 @@
 							<span style="font-weight:bold;font-size:18px;color:black!important;"> <%= link_to court.listing_name, court %></span><br>
 							<span id="average_rating"></span><%= court.average_rating %> Stars | <%= court.reviews.count %> Reviews<br>
 							<%= court.address %><br>
-							<!--<% if params[:time].present? && params[:time].strip != "" %>
+							<% if params[:time].present? && params[:time].strip != "" %>
 							<p><%= court.num_runs %> person(s) Playing Here @ <%= params[:time] %></p>
-							<% else %>
-							<p><%= court.num_runs %> person(s) scheduled to play here.</p>
-							<% end %>-->
+							<% end %>
 								<!--seenplayers-->
 								<span style="color:#939393;font-style:italic;"><% court.seenplayers.order("created_at DESC").limit(1).each do |seenplayers| %>
-								<%= seenplayers.players %> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %>.
+								<%= seenplayers.players %> player(s) last seen @ <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %>.
 								<% end %><br>
 								<!--seengames-->
 								<% court.seengames.order("created_at DESC").limit(1).each do |seengames| %>
-								<%= seengames.games %> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %>
+								<%= seengames.games %> game(s) back last reported @ <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %>
 								<% end %></span>
 						</div>
 					</div>
@@ -114,10 +114,11 @@
 				<hr>
 
 			<% end %>
-		</div>
 		<%= link_to "Don't see your court here? Add it now!", new_court_path %><br>
 		<%= will_paginate @courts, renderer: BootstrapPagination::Rails %>
+		</div>
 	</div>
+
 
 	<!--gmap-->
 	<div class="col-md-6">
@@ -135,7 +136,7 @@
 						          scrollwheel: false,
 						          zoom: 12,
 						          mapTypeId: google.maps.MapTypeId.ROADMAP
-						        }
+						        };
 						        var map = new google.maps.Map(mapCanvas, mapOptions);
 
 						        <% @arrCourts.each do |court| %>
@@ -143,17 +144,18 @@
 							        	position: new google.maps.LatLng(<%= court.latitude %>, <%= court.longitude %>),
 							        	title: "<%= court.listing_name %>"
 							        });
+							        marker.addListener('click', function() {
+										    infowindow.open(map, marker);
+										  });
+										  var infowindow = new google.maps.InfoWindow({
+										    content: contentString
+										  });
+										  var contentString = "<%= court.listing_name %><br><%= court.address %>"
 
 							        marker.setMap(map);
 
-
+							        
 						        <% end %>
-
-						        var contentString = "asdf"
-
-									  var infowindow = new google.maps.InfoWindow({
-									    content: contentString
-									  });
 									  marker.addListener('click', function() {
 									    infowindow.open(map, marker);
 									  });
@@ -198,8 +200,25 @@ $(function() {
 		$('#time').datetimepicker({
 				formatTime:'g:i a',
         minDate: 0,
-        minTime: 0,
 		});
 	});
 
+</script>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);        
+ 			$('#address').val(position.coords.latitude, position.coords.longitude);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+}
 </script>

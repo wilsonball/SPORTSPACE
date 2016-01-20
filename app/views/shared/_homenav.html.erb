@@ -11,12 +11,6 @@
           <p class="navbar-brand">collectif α</p>
           <% end %>
         </div>
-          <%= form_tag search_path, class: "navbar-form navbar-left", method: :get do |f| %>
-            <div class="form-group">
-              <%= text_field_tag :address, params[:address], placeholder: "Search Location (ex. Diamond Bar, CA)", class: "form-control" %>
-              <%= submit_tag "Search", style: "display:none;" %>
-            </div>
-          <% end %>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
 
@@ -27,7 +21,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <%= image_tag avatar_url(current_user), class: "img-circle avatar-small" %>&nbsp;
-                  <%= current_user.firstname %> <%= current_user.lastname %><span class="caret"></span></a>
+                  <%= current_user.fullname %><span class="caret"></span></a>
                 <!--dropdown menu-->
                 <ul class="dropdown-menu">
                   <li>

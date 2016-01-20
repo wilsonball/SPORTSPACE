@@ -1,0 +1,16 @@
+<br>
+<%= form_for ([@court, @court.photos.new]), html: {multipart: true} do |f| %>
+	<div class="col-md-12 row text-center">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="form-group">
+				<span class="btn btn-default btn-file">
+					<i class="fa fa-cloud-upload fa-lg"></i> Add A Photo
+					<%= file_field_tag "images[]", type: :file, multiple: true %>
+				</span>
+			</div>
+			<div class="action">
+				<%= f.submit "Submit", class: "btn btn-primary" %>
+			</div><br>
+		</div>
+	</div>
+<% end %>

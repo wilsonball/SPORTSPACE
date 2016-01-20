@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112015907) do
+ActiveRecord::Schema.define(version: 20160115195751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,27 @@ ActiveRecord::Schema.define(version: 20160112015907) do
     t.string   "rim_type"
     t.string   "rim_height"
     t.string   "backboard"
+    t.integer  "halfcourtcount"
+    t.integer  "fullcourtcount"
+    t.string   "streetaddress"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
+    t.time     "monopentime"
+    t.time     "monclosetime"
+    t.time     "tuesopentime"
+    t.time     "tuesclosetime"
+    t.time     "wedopentime"
+    t.time     "wedclosetime"
+    t.time     "thursopentime"
+    t.time     "thursclosetime"
+    t.time     "friopentime"
+    t.time     "friclosetime"
+    t.time     "satopentime"
+    t.time     "satclosetime"
+    t.time     "sunopentime"
+    t.time     "sunclosetime"
   end
 
   add_index "courts", ["user_id"], name: "index_courts_on_user_id", using: :btree
@@ -85,6 +106,7 @@ ActiveRecord::Schema.define(version: 20160112015907) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "user_id"
   end
 
   add_index "photos", ["court_id"], name: "index_photos_on_court_id", using: :btree
@@ -147,6 +169,18 @@ ActiveRecord::Schema.define(version: 20160112015907) do
 
   add_index "suggestions", ["user_id"], name: "index_suggestions_on_user_id", using: :btree
 
+  create_table "userphotos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "userphotos", ["user_id"], name: "index_userphotos_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -169,6 +203,8 @@ ActiveRecord::Schema.define(version: 20160112015907) do
     t.string   "image"
     t.string   "phone_number"
     t.text     "description"
+    t.string   "firstname"
+    t.string   "lastname"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -190,4 +226,5 @@ ActiveRecord::Schema.define(version: 20160112015907) do
   add_foreign_key "seenplayers", "courts"
   add_foreign_key "seenplayers", "users"
   add_foreign_key "suggestions", "users"
+  add_foreign_key "userphotos", "users"
 end

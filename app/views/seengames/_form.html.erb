@@ -1,6 +1,8 @@
 
 	<div class="col-md-12 price_form">
-		<h3 class="text-center">Here now?</h3>
+		<div class="col-md-12 price_tag">
+			<p class="text-center">Here now?</p>
+		</div>
 		<p class="text-center">How many game(s) back is it right now?</p>
 		<div class="form-group">
 			<%= form_for ([@court, @court.seengames.new]) do |f| %>
@@ -8,7 +10,7 @@
 				<%= f.hidden_field :court_id, value: @court.id %><br>
 				<br><div class="text-center">
 					<%= f.submit "Submit", class: "btn btn-primary" %>
-				</div>
+				</div><br>
 			<% end %>
 		</div>
 	</div>

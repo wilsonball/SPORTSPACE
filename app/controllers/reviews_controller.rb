@@ -1,9 +1,14 @@
 class ReviewsController < ApplicationController
 
+	def index
+		@reviews = Review.all
+		
+	end
+
 	def create
 		@review = current_user.reviews.create(review_params)
 		if @review.save
-			redirect_to @review.user, notice: "Thank you for writing a review!"
+			redirect_to @review.court, notice: "Thank you for writing a review!"
 		else
 			redirect_to @review.court, notice: "Missing rating or comment. Please try again!"
 		end

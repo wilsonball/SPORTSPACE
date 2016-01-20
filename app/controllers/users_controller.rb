@@ -3,6 +3,6 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@courts = @user.courts
 		@runs = @user.runs
-		@photos = @user.photos
+		@userphotos = @user.userphotos
 	end
 end

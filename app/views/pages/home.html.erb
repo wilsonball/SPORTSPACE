@@ -1,3 +1,4 @@
+
 <body style="background-position: top right; background-size: cover;
   background-attachment: fixed; background-image:url('http://sportsplex.phantomclubs.com/assets/images/basketball-floor.jpg');">
   <div class="container-home">
@@ -19,7 +20,7 @@
 				<%= text_field_tag :time, params[:time], placeholder: "ex. YYYY-MM-DD 00:00", readonly: true, class: "form-control" %>
 			</div>-->
 			<div class="col-md-2 text-center">
-				<%= submit_tag "Search", class: "btn btn-primary wide75" %>
+				<%= submit_tag "Search", id: "use-location-button", class: "btn btn-primary wide75" %>
 			</div>
 		</div>
 		<% end %>
@@ -27,21 +28,6 @@
 	</div>
 </div>
 <br>
-<!--<div class="row">
-	<% @courts.each do |court| %>
-
-		<div class="col-md-4">
-			<div class="panel panel-defult">
-				<div class="panel-heading preview">
-					<%= image_tag court.photos[0].image.url(:medium) if court.photos.length > 0 %>
-				</div>
-				<div class="panel-body">
-					<%= link_to court.listing_name, court %>
-				</div>
-			</div>
-		</div>
-	<% end %>
-</div>-->
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -66,4 +52,22 @@
 		navigator.geolocation.getCurrentPosition(onSuccess, onError);
 	});
 
+</script>
+
+<script>
+
+function getLocation() {
+    if (navigator.geolocation) {
+ 
+ 		navigator.geolocation.getCurrentPosition(onSuccess, onError);
+$('#use-location-button').on('click', function() {
+ 		function onSuccess(location) {
+ 			var coords = position.coords.latitude + ","  position.coords.longitude;
+ 			$('#address').val(coords);
+ 		}
+ 
+ 		function onError(err) {
+ 			alert("Error getting location: " + err.code);
+ 		}
+ 	});
 </script>

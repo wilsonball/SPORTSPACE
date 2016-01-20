@@ -4,16 +4,23 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable
+  before_save :fullname 
 
-  validates :fullname, presence: true, length: {maximum: 50}
+  validates :firstname, presence: true, length: {maximum: 50}
+  validates :lastname, presence: true, length: {maximum: 50}
 
   has_many :courts
   has_many :runs
   has_many :reviews
   has_many :photos
+  has_many :userphotos
   has_many :seengames
   has_many :seenplayers
   has_many :suggestions
+
+  def fullname
+    fullname = "#{firstname} #{lastname}"
+  end
 
   def self.from_omniauth(auth)
   	user = User.where(email: auth.info.email).first
@@ -22,7 +29,8 @@ class User < ActiveRecord::Base
   		return user
   	else
   		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  			user.fullname = auth.info.name
+  			user.firstname = auth.info.first_name
+        user.lastname = auth.info.last_name
   			user.provider = auth.provider
   			user.uid = auth.uid
   			user.email = auth.info.email
@@ -30,14 +38,5 @@ class User < ActiveRecord::Base
   			user.password = Devise.friendly_token[0,20]
   		end
   	end
-  end
-
-  def set_ip
-    
-  end
-
-  def set_location
-    self.location = LocationService.query(self)
-    
   end
 end
