@@ -39,56 +39,10 @@
 			<h4 style="font-weight:bold">Runs History</h4>
 		</div>-->
 
-		<!--if no courts then put "List your first court!"-->
-		<!--<h4>My Courts</h4><br>
-		<div class="row">
-				<% @courts.each do |court| %>
-				<div class="col-md-4">
-					<div class="panel panel-default">
-						<div class="panel-heading preview">
-							<%= image_tag court.photos[0].image.url(:medium) if court.photos.length > 0 %>
-						</div>
-						<div class="panel-body">
-							<%= link_to court.listing_name, court %><br>
-							
-								<span id="average_rating"></span><br>
-								<%= court.reviews.count %> Review(s)<br>
-								<%= court.average_rating %> Stars
-							
-						</div>
-					</div>
-				</div>
-
-				<script>
-					$('#average_rating').raty({
-						path: '/assets',
-						readOnly: true,
-						score: <%= court.average_rating %>
-					});
-				</script>
-				<% end %>			
+					
 		</div>-->
 
-		<!--reviews of my courts-->
-		<!--<h4>Reviews</h4><br>
-		<% @courts.each do |court| %>
-		  <% if !court.reviews.blank? %>
-		    <% court.reviews.each do |review| %>
-		      <div class="row">
-		      	<div class="col-md-2 text-center">
-		      	  <%= image_tag avatar_url(review.user), class: "img-circle avatar-medium" %><br>
-		      	  <%= review.user.fullname %>
-		      	</div>
-		      	<div class="col-md-10">
-		      	  <%= link_to court.listing_name, court %><br>
-		      	  <%= review.comment %><br>
-		      	  <%= review.created_at.strftime("%v") %>
-		      	</div>
-		      </div>
-		      <br>
-		    <% end %>
-		  <% end %>
-		<% end %>-->
+		
 
 	</div>
 </div>
