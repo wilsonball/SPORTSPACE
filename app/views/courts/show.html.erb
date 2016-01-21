@@ -1,5 +1,4 @@
-<div class="panel panel-default">
-	<div class="panel-body">
+
 		<div class="col-md-12">
 		<!--Main Info-->
 				<!--court info-->
@@ -60,6 +59,22 @@
 									<p><%= @court.halfcourtcount %> Half Court(s)</p>
 								</div>
 							</div>
+					</div>
+
+					<!--reports-->
+					<div class="row">
+						<div class="col-md-12">
+							<!--seenplayers-->
+							<h4>Last Players Seen</h4>
+								<% @court.seenplayers.order('created_at desc').each do |seenplayers| %>
+									<%= seenplayers.players %> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
+								<% end %>
+							<!--seengames-->
+							<h4>Last Games Seen</h4>
+								<% @court.seengames.order('created_at desc').each do |seengames| %>
+									<%= seengames.games %> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
+								<% end %>
+						</div>
 					</div>
 
 					<!--summary-->
