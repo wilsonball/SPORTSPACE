@@ -13,7 +13,7 @@ class RunsController < ApplicationController
 		@run = current_user.runs.create(run_params)
 
 		if @run.save
-			redirect_to @run.user, notice: "Your available time has been set!"
+			redirect_to @run.court, notice: "Your available time has been set!"
 		else
 			redirect_to @run.court, notice: "Missing Start or End Time. Please try again!"
 		end

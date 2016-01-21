@@ -5,7 +5,7 @@
 				<div class="row">
 					<!--listing name/address-->
 					<div class="row">					
-						<div class="col-md-8">
+						<div class="col-md-12">
 							<h2><strong><%= @court.listing_name %></strong></h2>
 								<% if current_user && current_user == @court.user %>
 									<%= link_to "Edit My Listing", edit_court_path%><br>
@@ -18,16 +18,55 @@
 								<%= @court.city %>, <%= @court.state %> <%= @court.zip %>		
 							<!--Gmap-->
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<style>
 								      #map {
 								        width: 100%;
-								        height: 400px;
+								        height: 250px;
 								      }
 					    		</style>								   
 
 								    <div id="map"></div>
 
+								</div>
+
+								<div class="col-md-4 col-md-offset-2">
+									<!--Carousel-->
+							<div class="row">
+								<div class="col-md-12">
+									<div id="myCarousel" class="carousel slide" data-ride="carousel">
+									  <!-- Indicators -->
+									  <% if @photos %>				  
+										  <ol class="carousel-indicators">
+										  	<% @photos.each do |photo| %>
+										    	<li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
+										    <% end %>
+										  </ol>
+									  <% end %>
+
+									  <!-- Wrapper for slides -->
+									  <div class="carousel-inner" role="listbox">
+									  	<% if @photos %>
+									  	  <% @photos.each do |photo| %>
+									    	<div class="item <%= 'active' if photo.id == @photos[0].id %>">
+									      		<%= image_tag photo.image.url() %>
+									    	</div>
+									      <% end %>
+									    <% end %>
+									    </div>			    
+
+									  <!-- Left and right controls -->
+									  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+									    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									    <span class="sr-only">Previous</span>
+									  </a>
+									  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+									    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+									    <span class="sr-only">Next</span>
+									  </a>
+									</div>
+								</div>
+							</div>
 								</div>
 							</div>
 												<!--icons-->
@@ -64,16 +103,42 @@
 					<!--reports-->
 					<div class="row">
 						<div class="col-md-12">
+							<!--players commited-->
+							<div class="row">
+								<div class="col-md-6">
+									<%= render 'runs/form' %>
+								</div>
+								<div class="col-md-6">
+									<h4>Players Commited</h4>
+										<% @court.runs.order('end_time desc').limit(5).each do |runs| %>
+											<span style="font-weight:bold"><%= runs.user.firstname %></span> commited to play here from <%= runs.start_time.strftime('%a %m/%e/%y %l:%M %p') %> to <%= runs.end_time.strftime('%a %m/%e/%y %l:%M %p') %><br>
+										<% end %>
+								</div>								
+							</div>
 							<!--seenplayers-->
-							<h4>Last Players Seen</h4>
-								<% @court.seenplayers.order('created_at desc').each do |seenplayers| %>
-									<%= seenplayers.players %> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
-								<% end %>
+							<div class="row">
+								<div class="col-md-6">
+									<%= render 'seenplayers/form' %>
+								</div>
+								<div class="col-md-6">
+									<h4>Last Players Seen</h4>
+										<% @court.seenplayers.order('created_at desc').limit(5).each do |seenplayers| %>
+											<span style="font-weight:bold"><%= seenplayers.players %></span> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
+										<% end %>
+									</div>								
+							</div>
 							<!--seengames-->
-							<h4>Last Games Seen</h4>
-								<% @court.seengames.order('created_at desc').each do |seengames| %>
-									<%= seengames.games %> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
-								<% end %>
+							<div class="row">
+								<div class="col-md-6">
+									<%= render 'seengames/form' %>
+								</div>
+								<div class="col-md-6">
+									<h4>Last Games Seen</h4>
+										<% @court.seengames.order('created_at desc').limit(5).each do |seengames| %>
+											<span style="font-weight:bold"><%= seengames.games %></span> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
+										<% end %>
+									</div>								
+							</div>
 						</div>
 					</div>
 
@@ -138,56 +203,6 @@
 						</div>
 							
 
-						</div>
-						<div class="col-md-4">
-							<!--Carousel-->
-							<div class="row">
-								<div class="col-md-12">
-									<div id="myCarousel" class="carousel slide" data-ride="carousel">
-									  <!-- Indicators -->
-									  <% if @photos %>				  
-										  <ol class="carousel-indicators">
-										  	<% @photos.each do |photo| %>
-										    	<li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
-										    <% end %>
-										  </ol>
-									  <% end %>
-
-									  <!-- Wrapper for slides -->
-									  <div class="carousel-inner" role="listbox">
-									  	<% if @photos %>
-									  	  <% @photos.each do |photo| %>
-									    	<div class="item <%= 'active' if photo.id == @photos[0].id %>">
-									      		<%= image_tag photo.image.url() %>
-									    	</div>
-									      <% end %>
-									    <% end %>
-									    </div>			    
-
-									  <!-- Left and right controls -->
-									  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-									    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-									    <span class="sr-only">Previous</span>
-									  </a>
-									  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-									    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-									    <span class="sr-only">Next</span>
-									  </a>
-									</div>
-								</div>
-							</div>
-							<br>
-							
-							<!--runs form-->
-							<p id="runsform">
-								<%= render 'runs/form' %>
-							</p>
-							<p id="seengamesform">
-								<%= render 'seengames/form' %>
-							</p>
-							<p id="seenplayersform">
-								<%= render 'seenplayers/form' %>
-							</p>
 						</div>
 						<!--<div class="col-md-3 text-center">
 							<h4>Court Manager</h4>
