@@ -5,17 +5,17 @@
         <p class="text-center">Schedule Availability</p>
 		</div>
 	</div>
-  <p class="text-center">Let others know when you'll be here.</p>
+  <p class="text-center">Date will automatically be set to today.</p>
   <div class="row">
     <div class="col-md-12">
-      <%= f.text_field :start_time, placeholder: 'Start Date & Time', readonly: true, class: 'form-control' %>
+      <%= f.text_field :start_time, placeholder: 'Start Time', readonly: true, class: 'form-control' %>
     </div>
   </div>
   <br>
 
   <div class="row">
     <div class="col-md-12">
-      <%= f.text_field :end_time, placeholder: 'End Date & Time', readonly: true, class: 'form-control' %>
+      <%= f.text_field :end_time, placeholder: 'End Time', readonly: true, class: 'form-control' %>
     </div>
   </div>
 
@@ -52,16 +52,10 @@
 
   $(function() {
 
-    $('#run_start_time').datetimepicker({
-        formatTime:'g:i a',
-        format:'m/d/Y g:i a',
-        minDate: 0,
+    $('#run_start_time').pickatime({
     });
 
-    $('#run_end_time').datetimepicker({
-        formatTime:'g:i a',
-        format:'m/d/Y g:i a',
-        minDate: 0,
+    $('#run_end_time').pickatime({
     });
   });
 
