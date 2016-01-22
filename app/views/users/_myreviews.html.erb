@@ -1,0 +1,21 @@
+
+<!--reviews of my courts-->
+		<!--<h4>Reviews</h4><br>
+		<% @courts.each do |court| %>
+		  <% if !court.reviews.blank? %>
+		    <% court.reviews.each do |review| %>
+		      <div class="row">
+		      	<div class="col-md-2 text-center">
+		      	  <%= image_tag avatar_url(review.user), class: "img-circle avatar-medium" %><br>
+		      	  <%= review.user.fullname %>
+		      	</div>
+		      	<div class="col-md-10">
+		      	  <%= link_to court.listing_name, court %><br>
+		      	  <%= review.comment %><br>
+		      	  <%= review.created_at.strftime("%v") %>
+		      	</div>
+		      </div>
+		      <br>
+		    <% end %>
+		  <% end %>
+		<% end %>-->

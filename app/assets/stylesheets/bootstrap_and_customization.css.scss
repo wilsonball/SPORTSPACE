@@ -1,1 +1,24 @@
 $brand-primary: #FA8320;
+$link-hover-decoration: none;
+
+.search_result-title a{
+	font-weight:bold;
+	font-size:18px;
+	color:black;
+}
+
+.signup-button a:hover {
+	color: #FA8320!important;
+}
+
+.homenav-color > li > a {
+	color:white!important;
+}
+
+.homenav-color > li > a:hover {
+	color: #e9e9e9!important;
+}
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "toastr";

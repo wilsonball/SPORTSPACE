@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :disable_nav, only: [:home, :search]
+  before_filter :disable_nav, only: [:home]
 
   def home
   end
@@ -40,7 +40,7 @@ class PagesController < ApplicationController
 
     arrResult = Array.new
 
-  	@courts = @search.result.paginate(:page => params[:page], :per_page => 5, :total_entries => 500)
+  	@courts = @search.result.paginate(:page => params[:page], :per_page => 10, :total_entries => 500)
     # @search_name = @courts_listing_name.ransack(params[:q])
 
   	@arrCourts = @courts.to_a

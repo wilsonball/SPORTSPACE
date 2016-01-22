@@ -13,9 +13,6 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "toastr";
 
 .avatar-small {
 	width: 28px;
@@ -396,6 +393,7 @@ hr {
 	height: 30px;
 }
 
-.navbar-default .navbar-nav > li > a {
-	color:#white;
+.navbar-default .navbar-nav-home > li > a {
+	color:white;
+	display:inline;
 }
