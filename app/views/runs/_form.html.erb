@@ -1,23 +1,23 @@
-<%= form_for ([@court, @court.runs.new]) do |f| %>
-<div class="col-md-12 price_form">
-  <div class="row">
-		<div class="col-md-12 price_tag">
-        <p class="text-center">Schedule Availability</p>
-		</div>
-	</div>
-  <p class="text-center">Date will automatically be set to today.</p>
-  <div class="row">
-    <div class="col-md-12">
-      <%= f.text_field :start_time, placeholder: 'Start Time', readonly: true, class: 'form-control' %>
-    </div>
-  </div>
-  <br>
+<div class="panel panel-default"> 
+  <%= form_for ([@court, @court.runs.new]) do |f| %>
+  		<div class="panel-heading text-center">
+          Schedule Availability
+      </div>
+    <div class="panel-body">
+      <p class="text-center">Date will automatically be set to today.</p>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.text_field :start_time, placeholder: 'Start Time', readonly: true, class: 'form-control' %>
+        </div>
+      </div>
+      <br>
 
-  <div class="row">
-    <div class="col-md-12">
-      <%= f.text_field :end_time, placeholder: 'End Time', readonly: true, class: 'form-control' %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.text_field :end_time, placeholder: 'End Time', readonly: true, class: 'form-control' %>
+        </div>
+      </div>
     </div>
-  </div>
 
 
   <%= f.hidden_field :court_id, value: @court.id %>
@@ -47,6 +47,7 @@
   &nbsp;
 </div>
 <% end %>
+</div>
 
 <script>
 

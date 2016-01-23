@@ -105,9 +105,6 @@
 						<div class="col-md-12">
 							<!--players commited-->
 							<div class="row">
-								<div class="col-md-4">
-									<%= render 'runs/form' %>
-								</div>
 								<div class="col-md-8">
 									<h4>Players Commited</h4>
 										<% if @court.runs.count > 0 %>
@@ -118,7 +115,10 @@
 										<% else %>
 											No one has scheduled a time to play here yet. Be the first!
 										<% end %>
-								</div>								
+								</div>
+								<div class="col-md-4">
+									<%= render 'runs/form' %>
+								</div>														
 							</div>
 							<!--seenplayers-->
 							<div class="row">
@@ -148,9 +148,6 @@
 							</div>
 							<!--seengames-->
 							<div class="row">
-								<div class="col-md-4">
-									<%= render 'seengames/form' %>
-								</div>
 								<div class="col-md-8">
 									<h4>Last Games Seen</h4>
 										<% if @court.seengames.count > 0 %>
@@ -170,7 +167,11 @@
 										<% else %>
 											No one has reported any games here yet. Be the first!
 										<% end %>
-									</div>								
+								</div>
+								<div class="col-md-4">
+									<%= render 'seengames/form' %>
+								</div>
+															
 							</div>
 						</div>
 					</div>
@@ -320,6 +321,9 @@ $(function(){ // document ready
       scrollwheel: false,
       center: new google.maps.LatLng(<%= @court.latitude %>, <%= @court.longitude %>),
       zoom: 14,
+      draggable: false,
+      mapTypeControl: false,
+      streetViewControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(mapCanvas, mapOptions)
