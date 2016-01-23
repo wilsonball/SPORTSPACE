@@ -4,4 +4,6 @@ class Run < ActiveRecord::Base
 
   validates :start_time, presence: true
   validates :end_time, presence: true
+
+  acts_as_votable
 end

@@ -7,7 +7,21 @@ Rails.application.routes.draw do
              :controllers => {:omniauth_callbacks => 'omniauth_callbacks',
                               :registrations => 'registrations'
                              }
-                               
+  
+
+
+  resources :seengames do 
+    member do
+      put "like", to: "seengames#upvote"
+      put "dislike", to: "seengames#downvote"
+    end
+  end
+  resources :seenplayers do 
+    member do
+      put "like", to: "seenplayers#upvote"
+      put "dislike", to: "seenplayers#downvote"
+    end
+  end  
   resources :users, only: [:show]
   resources :courts
   resources :photos

@@ -92,7 +92,9 @@
 					<!--listing-->
 					<div class="row">
 						<div style="float:left;margin-right:5px;">
-							<%= image_tag court.show_first_photo, class: "img-rounded" %>
+							<%= link_to court do %>
+								<%= image_tag court.show_first_photo, class: "img-rounded" %>
+							<% end %>
 						</div>
 						<!--listing text-->
 						<div>
@@ -131,32 +133,6 @@
 
 	</div>
 </div>
-
-
-<script>
-$(function(){ // document ready
-
-  if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
-
-    var stickyTop = $('.sticky').offset().top; // returns number
-
-    $(window).scroll(function(){ // scroll event
-
-      var windowTop = $(window).scrollTop(); // returns number
-
-      if (stickyTop < windowTop){
-        $('.sticky').css({ position: 'fixed', top: 0 });
-      }
-      else {
-        $('.sticky').css('position','static');
-      }
-
-    });
-
-  }
-
-});
-</script>
 
 <script>
 
@@ -228,3 +204,4 @@ $('#use-location-button').on('click', function() {
     }
     google.maps.event.addDomListener(window, 'load', initialize);
   </script>
+

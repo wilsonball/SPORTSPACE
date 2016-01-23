@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :seenplayers
   has_many :suggestions
 
+  acts_as_voter
+
   def fullname
     fullname = "#{firstname} #{lastname}"
   end

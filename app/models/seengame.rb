@@ -4,4 +4,6 @@ class Seengame < ActiveRecord::Base
 
 	validates :games, presence: true
 
+	acts_as_votable
+
 end

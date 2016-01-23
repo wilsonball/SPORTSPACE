@@ -105,14 +105,15 @@
 						<div class="col-md-12">
 							<!--players commited-->
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<%= render 'runs/form' %>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-8">
 									<h4>Players Commited</h4>
 										<% if @court.runs.count > 0 %>
 											<% @court.runs.order('end_time desc').limit(5).each do |runs| %>
-												<span style="font-weight:bold"><%= runs.user.firstname %></span> commited to play here from <%= runs.start_time.strftime('%a %m/%e/%y %l:%M %p') %> to <%= runs.end_time.strftime('%a %m/%e/%y %l:%M %p') %><br>
+												<span style="font-weight:bold"><%= runs.user.firstname %></span> commited to play here from <%= runs.start_time.strftime('%a %m/%e/%y %l:%M %p') %> to <%= runs.end_time.strftime('%a %m/%e/%y %l:%M %p') %>
+													<hr>
 											<% end %>
 										<% else %>
 											No one has scheduled a time to play here yet. Be the first!
@@ -121,14 +122,24 @@
 							</div>
 							<!--seenplayers-->
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<%= render 'seenplayers/form' %>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-8">
 									<h4>Last Players Seen</h4>
 										<% if @court.seenplayers.count > 0 %>
 											<% @court.seenplayers.order('created_at desc').limit(5).each do |seenplayers| %>
-												<span style="font-weight:bold"><%= seenplayers.players %></span> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
+												<span style="font-weight:bold"><%= seenplayers.players %></span> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %>
+												<%= link_to like_seenplayer_path(seenplayers), method: :put do %>
+												  Upvote
+												  <%= seenplayers.get_upvotes.size %>
+												<% end %>
+
+												<%= link_to dislike_seenplayer_path(seenplayers), method: :put do %>
+												  Downvote
+												  <%= seenplayers.get_downvotes.size %>
+												<% end %>
+												<br>
 											<% end %>
 										<% else %>
 											No one has reported any players here yet. Be the first!
@@ -137,14 +148,24 @@
 							</div>
 							<!--seengames-->
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<%= render 'seengames/form' %>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-8">
 									<h4>Last Games Seen</h4>
 										<% if @court.seengames.count > 0 %>
 											<% @court.seengames.order('created_at desc').limit(5).each do |seengames| %>
-												<span style="font-weight:bold"><%= seengames.games %></span> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
+												<span style="font-weight:bold"><%= seengames.games %></span> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %>
+												<%= link_to like_seengame_path(seengames), method: :put do %>
+												  Upvote
+												  <%= seengames.get_upvotes.size %>
+												<% end %>
+
+												<%= link_to dislike_seengame_path(seengames), method: :put do %>
+												  Downvote
+												  <%= seengames.get_downvotes.size %>
+												<% end %>
+												<br>
 											<% end %>
 										<% else %>
 											No one has reported any games here yet. Be the first!
@@ -300,12 +321,24 @@ $(function(){ // document ready
       center: new google.maps.LatLng(<%= @court.latitude %>, <%= @court.longitude %>),
       zoom: 14,
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+    };
     var map = new google.maps.Map(mapCanvas, mapOptions)
 
     var marker = new google.maps.Marker({
-    	position: new google.maps.LatLng(<%= @court.latitude %>, <%= @court.longitude %>), title: "<%= @court.listing_name %>"
+    	position: new google.maps.LatLng(<%= @court.latitude %>, <%= @court.longitude %>),
+    	title: "<%= @court.listing_name %>"
     });
+
+    var infowindow = new google.maps.InfoWindow({
+	    content: contentString
+	  });
+
+	  var contentString = '<%= @court.listing_name %><br><%= @court.address %>';
+
+	  marker.addListener('click', function() {
+	    infowindow.open(map, marker);
+	  });
+
 
     marker.setMap(map);
   }

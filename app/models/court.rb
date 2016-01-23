@@ -17,6 +17,16 @@ class Court < ActiveRecord::Base
 	validates :state, presence: true, length: {maximum: 50}
 	validates :zip, presence: true, length: {maximum: 20}
 
+	extend FriendlyId
+  friendly_id :slug_candidates, use: [:slugged, :finders]
+
+  def slug_candidates
+    [
+      :listing_name,
+      [:listing_name, :city]
+    ]
+  end
+
 
 	def address
     address = "#{streetaddress} #{city}, #{state} #{zip}"
