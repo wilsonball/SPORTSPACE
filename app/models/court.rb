@@ -22,7 +22,6 @@ class Court < ActiveRecord::Base
 
   def slug_candidates
     [
-      :listing_name,
       [:listing_name, :city]
     ]
   end

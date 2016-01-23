@@ -1,0 +1,17 @@
+<% if @court.seenplayers.count > 0 %>
+	<% @court.seenplayers.order('created_at desc').limit(5).each do |seenplayers| %>
+		<span style="font-weight:bold"><%= seenplayers.players %></span> player(s) last seen at <%= seenplayers.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
+		<%= link_to like_seenplayer_path(seenplayers), method: :put do %>
+		  <%= seenplayers.get_upvotes.size %>
+		  <span class="glyphicon glyphicon-thumbs-up"></span> True
+		<% end %>
+
+		<%= link_to dislike_seenplayer_path(seenplayers), method: :put do %>
+		  <%= seenplayers.get_downvotes.size %>
+		  <span class="glyphicon glyphicon-thumbs-down"></span> False
+		<% end %>
+		<br>
+	<% end %>
+<% else %>
+	No one has reported any players here yet. Be the first!
+<% end %>

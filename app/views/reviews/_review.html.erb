@@ -6,17 +6,17 @@
 	<hr>
 
 	<div class="row">
-		<div class="col-md-1">
+		<div class="col-md-1 col-xs-2">
 			<%= image_tag avatar_url(review.user), class: "img-circle avatar-medium" %>
 		</div>
-		<div class="col-md-11">
+		<div class="col-md-11 col-xs-10">
 			<strong><%= review.user.fullname %> <div id="stars_<%= review.id %>"></div></strong>
 		</div>
 
-		<div class="col-md-offset-1 col-md-11"><%= review.created_at.strftime("%m/%d/%y") %></div>
-		<div class="col-md-offset-1 col-md-11"><%= review.comment %></div>
+		<div class="col-md-offset-1 col-md-11 col-xs-offset-2 col-xs-10"><%= review.created_at.strftime("%m/%d/%y") %></div>
+		<div class="col-md-offset-1 col-md-11 col-xs-offset-2 col-xs-10"><%= review.comment %></div>
 		<br>
-		<div class="col-md-offset-1 col-md-11">
+		<div class="col-md-offset-1 col-md-11 col-xs-offset-2 col-xs-10">
 				<%= link_to "Remove My Review", [@court, review], method: :delete, data: {confirm: "Are you sure?"} if current_user && current_user == review.user %>
 		</div>
 	</div>

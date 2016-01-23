@@ -1,6 +1,15 @@
 $brand-primary: #FA8320;
 $link-hover-decoration: none;
 
+.runs-title a {
+	color:black;
+	font-weight:bold;
+}
+
+.runs-remove a {
+	color:red;
+}
+
 .search_result-title a{
 	font-weight:bold;
 	font-size:18px;

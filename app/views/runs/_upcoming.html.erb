@@ -5,11 +5,11 @@
 				<%= image_tag run.court.show_first_photo %>
 				</div>
 				<div>
-					<span class="font-weight:bold"><%= link_to run.court.listing_name, run.court %></span><br>
+					<span class="runs-title"><%= link_to run.court.listing_name, run.court %></span><br>
 					From <%= run.start_time.strftime('%a %m/%d/%y %l:%M %p') %> to <%= run.end_time.strftime('%a %m/%d/%y %l:%M %p') %><br>
 					<!--<p>With # others</p>-->
 				</div>
-				<div class="row" style="font-size:10px">
+				<div class="row runs-remove" style="font-size:10px">
 					<%= link_to "I can't make it.", court_run_path(court_id: run.court, id: run), method: :delete, data: {confirm: "Are you sure you can't make it?"} if current_user && current_user == run.user %>
 				</div>
 			</div>

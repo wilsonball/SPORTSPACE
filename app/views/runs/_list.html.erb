@@ -1,0 +1,10 @@
+<% if @court.runs.count > 0 %>
+	<% @court.runs.order('end_time desc').limit(5).each do |runs| %>
+		<%= link_to runs.user do %>
+			<em><%= runs.user.firstname %></em>
+		<% end %> scheduled to play here from <%= runs.start_time.strftime('%a %m/%e/%y %l:%M %p') %> to <%= runs.end_time.strftime('%a %m/%e/%y %l:%M %p') %>
+		<br>
+	<% end %>	
+<% else %>
+	No one has scheduled a time to play here yet. Be the first!
+<% end %>

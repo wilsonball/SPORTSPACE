@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-3 col-sm-3">
 		<div class="center">
 			<%= image_tag avatar_url(@user), class: "avatar-full" %>
 			<h2 class="text-center"><%= @user.fullname %></h2>
@@ -26,14 +26,15 @@
 			</div>
 	    </div>-->
 	</div>
-	<div class="col-md-9">
+	<div class="col-md-9 col-sm-9">
 		<!--user description-->	
 
 		<!--user runs, if no runs, put "set your first run!"-->
 		<div>
-			<h4 style="font-weight:bold">Scheduled Runs</h4>
-			<%= render 'runs/upcoming' %>			
+			<p style="font-weight:bold">Scheduled Runs</p>
 		</div>
+			<%= render 'runs/upcoming' %>			
+		
 
 		<!--<div>
 			<h4 style="font-weight:bold">Runs History</h4>
