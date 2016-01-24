@@ -1,5 +1,5 @@
 <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-inverse navbar-static-top">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -15,39 +15,39 @@
           <ul class="nav navbar-nav navbar-right homenav-color">
 
             <% if (!user_signed_in?) %>
-              <li><%= link_to "Log In", new_user_session_path %></li>
-              <li><%= link_to "Sign Up", new_user_registration_path, class: "btn-primary" %></li>
+              <li class="text-center"><%= link_to "Log In", new_user_session_path %></li>
+              <li class="text-center"><%= button_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-sm navbar-btn" %></li>
             <% else %>
-              <li class="dropdown">
+              <li class="dropdown text-center">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <%= image_tag avatar_url(current_user), class: "img-rounded avatar-small" %>&nbsp;
                   <%= current_user.fullname %><span class="caret"></span></a>
                 <!--dropdown menu-->
                 <ul class="dropdown-menu">
-                  <li>
+                  <li class="text-center">
                     <%= link_to user_path(current_user.id) do %>
                     <i class="fa fa-user"></i> &nbsp;&nbsp;My Profile
                     <% end %>
                   </li>
-                  <li>
+                  <li class="text-center">
                     <%= link_to courts_path do %>
                     <i class="fa fa-bolt"></i> &nbsp;&nbsp;My Activity
                     <% end %>
                   </li>
                   <!--<li><a href="#">Nearby Courts</a></li>-->        
-                  <li>
+                  <li class="text-center">
                     <%= link_to conversations_path do %>
                     <i class="fa fa-envelope-o"></i> &nbsp;&nbsp;Messages
                     <% end %>
                   </li>
                   <li role="separator" class="divider"></li>
                   <!--<li><a href="#">Account Settings</a></li>-->
-                  <li>
+                  <li class="text-center">
                     <%= link_to edit_user_registration_path do %>
                     <i class="fa fa-pencil"></i> &nbsp;&nbsp;Edit Profile
                     <% end %>
                   </li>
-                  <li>
+                  <li class="text-center">
                     <%= link_to destroy_user_session_path, method: :delete do %>
                     <i class="fa fa-power-off"></i> &nbsp;&nbsp;Log Out
                     <% end %>
@@ -62,7 +62,7 @@
               <i class="fa fa-map-marker"></i> List A Court
               <% end %>
             </li>-->
-            <li>
+            <li class="text-center">
               <%= link_to new_suggestion_path do %>
               <i class="fa fa-briefcase"></i> Suggestions
               <% end %>

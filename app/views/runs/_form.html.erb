@@ -1,10 +1,8 @@
 <div class="panel panel-default"> 
   <%= form_for ([@court, @court.runs.new]) do |f| %>
-  		<div class="panel-heading text-center">
-          Schedule Availability
-      </div>
     <div class="panel-body">
-      <p class="text-center">Date will automatically be set to today.</p>
+      <p class="text-center">Schedule A Time</p>
+      <p class="text-center"><em><small>Date will be set to today.</small></em></p>
       <div class="row">
         <div class="col-md-12">
           <%= f.text_field :start_time, placeholder: 'Start Time', readonly: true, class: 'form-control' %>
