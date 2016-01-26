@@ -46,22 +46,10 @@ body {
 }
 
 .navbar {
-  padding-bottom:20px;
+  padding-bottom:5px;
   margin-bottom:0;
   border: 1px solid black;
-}
-
-.navbar-default {
-	background-color: transparent;
-	border-color: transparent;
-}
-
-
-.navbar-default .navbar-brand {
-	color: #FA8320;
-	font-size: 2em;
-	font-weight: 400;
-}
+ }
 
 /* change navbar link color */
 /* .navbar-nav > li > a {
@@ -93,7 +81,7 @@ body {
 .btn-default.btn {
 	width:100%;
 	border-radius:2px;
-	padding:10px 0;
+	padding: 0;
 	margin-top: 10px;
 }
 
@@ -270,7 +258,7 @@ input[type="checkbox"]:checked:before {
 }
 
 .price_form {
-	background-color: #e9e9e9;
+	background-color: #f1f1f1;
 }
 
 .conversation {

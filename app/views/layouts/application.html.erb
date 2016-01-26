@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
   <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
-  <meta name="viewport" content="width=device-width", initial-scale=1">
+  <meta name="viewport" content="width=device-width", initial-scale=1>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -18,11 +18,13 @@
     <%= render 'shared/message' %>
   </div>
 	<div class="container">
+  <br>
   <%= yield %>
   </div>
 
   <script>
     $('#use-location-button').on('click', function() {
+
       function onSuccess(location) {
         var coords = location.coords.latitude + "," + location.coords.longitude;
         $('#address').val(coords);

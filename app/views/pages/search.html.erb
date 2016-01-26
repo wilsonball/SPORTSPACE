@@ -145,64 +145,47 @@ $(function() {
 
 </script>
 
-<script>
-
-$('#use-location-button').on('click', function() {
-		function onSuccess(location) {
-			var coords = location.coords.latitude + "," + location.coords.longitude;
-			$('#address').val(coords);
-		}
-
-		function onError(err) {
-			alert("Error getting location: " + err.code);
-		}
-
-		navigator.geolocation.getCurrentPosition(onSuccess, onError);
-	});
-
-</script>
-
 <script src="https://maps.googleapis.com/maps/api/js"></script>
-  <script>
-    function initialize() {
-      var mapCanvas = document.getElementById('map');
-      var mapOptions = {
-        <% if @arrCourts.length > 0 %>
-          center: new google.maps.LatLng(<%= @arrCourts[0].latitude %>, <%= @arrCourts[0].longitude %>),
-        <% else %>
-          center: new.google.maps.LatLng(44.5483, -78.5463),
-        <% end %>
-        scrollwheel: false,
-        zoom: 12,
-      	mapTypeControl: false,
-      	streetViewControl: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      var map = new google.maps.Map(mapCanvas, mapOptions);
-
-      <% @arrCourts.each do |court| %>
-        var marker = new google.maps.Marker({
-        	position: new google.maps.LatLng(<%= court.latitude %>, <%= court.longitude %>),
-        	title: "<%= court.listing_name %>",
-        });
-
-        var contentString = '<strong><%= court.listing_name %></strong><br><em><%= court.address %></em>';
-
-        var infowindow = new google.maps.InfoWindow({
-    		content: contentString
-    		});
-
-    		marker.addListener('click', function() {
-			    infowindow.open(map, marker);
-			  });
-
-        marker.setMap(map);
-
-        
+<script>
+  function initialize() {
+    var mapCanvas = document.getElementById('map');
+    var mapOptions = {
+      <% if @arrCourts.length > 0 %>
+        center: new google.maps.LatLng(<%= @arrCourts[0].latitude %>, <%= @arrCourts[0].longitude %>),
+      <% else %>
+        center: new.google.maps.LatLng(44.5483, -78.5463),
       <% end %>
+      scrollwheel: false,
+      zoom: 12,
+    	mapTypeControl: false,
+    	streetViewControl: false,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    <% @arrCourts.each do |court| %>
+      var marker = new google.maps.Marker({
+      	position: new google.maps.LatLng(<%= court.latitude %>, <%= court.longitude %>),
+      	title: "<%= court.listing_name %>",
+      });
+
+      var contentString = '<strong><%= court.listing_name %></strong><br><em><%= court.address %></em>';
+
+      var infowindow = new google.maps.InfoWindow({
+  		content: contentString
+  		});
+
+  		marker.addListener('click', function() {
+		    infowindow.open(map, marker);
+		  });
+
+      marker.setMap(map);
+
       
-		  
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-  </script>
+    <% end %>
+    
+	  
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 
