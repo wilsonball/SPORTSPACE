@@ -7,7 +7,7 @@
 		<h1>Find people playing pick-up basketball nearby.</h1>
 	</div>
 	<div class="container mainsearchbar">
-		<%= form_tag search_path, id: "home-search", method: :get do %>
+		<%= form_tag search_path, id: "search_form", method: :get do %>
 		<div class="row">
 			<div class="col-md-4 col-md-offset-1">
 				<%= text_field_tag :name, params[:name], placeholder: "Name (ex. 24 Hour Fitness)", class: "form-control" %>

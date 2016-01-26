@@ -23,11 +23,13 @@
   </div>
 
   <script>
+
     $('#use-location-button').on('click', function() {
 
       function onSuccess(location) {
         var coords = location.coords.latitude + "," + location.coords.longitude;
         $('#address').val(coords);
+        return true;
       }
 
       function onError(err) {
