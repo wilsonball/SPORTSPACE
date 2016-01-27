@@ -11,7 +11,7 @@
           <p class="navbar-brand">collectif α</p>
           <% end %>
         </div>
-          <%= form_tag search_path, class: "navbar-form navbar-left", method: :get do |f| %>
+          <%= form_tag search_path, class: "navbar-form navbar-left", id: "search_form", method: :get do |f| %>
             <div class="form-group">
               <%= text_field_tag :name, params[:name], placeholder: "Name", class: "form-control input-sm" %>
               <%= text_field_tag :address, params[:address], placeholder: "Location", class: "form-control input-sm" %>
