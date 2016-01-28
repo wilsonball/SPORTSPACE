@@ -1,6 +1,6 @@
 <div class="panel panel-default price_form">
 	<div class="panel-body">
-		<p class="text-center">How many game(s) back is it?</p>
+		<p class="text-center">How many game(s) wait is it?</p>
 		<div class="form-group">
 			<%= form_for ([@court, @court.seengames.new]) do |f| %>
 				<%= f.select :games, [["0",0], ["1",1], ["2",2], ["3",3], ["4",4], ["5",5]], prompt: "Games Back", class: "form-control" %>

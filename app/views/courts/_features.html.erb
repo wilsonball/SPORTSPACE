@@ -1,0 +1,27 @@
+<div class="text-center row-space-3">
+	<% if @court.court_type != "Outdoor" %>
+		<div class="col-sm-3 col-xs-6">
+			<i class="fa fa-lightbulb-o fa-2x"></i>
+			<p><%= @court.court_type %> Court</p>
+			<p>
+		</div>
+	<% else %>
+		<div class="col-sm-3 col-xs-6">
+			<i class="fa fa-sun-o fa-2x"></i>
+			<p><%= @court.court_type %> Court</p>
+			<p>
+		</div>
+	<% end %>
+	<div class="col-sm-3 col-xs-6">
+		<i class="fa fa-users fa-2x"></i>
+		<p><%= @court.court_floor %> Floor</p>
+	</div>
+	<div class="col-sm-3 col-xs-6">
+		<i class="fa fa-star fa-2x"></i>
+		<p><%= @court.fullcourtcount %> Full Court(s)</p>
+	</div>
+	<div class="col-sm-3 col-xs-6">
+		<i class="fa fa-star-half fa-2x"></i>
+		<p><%= @court.halfcourtcount %> Half Court(s)</p>
+	</div>
+</div>

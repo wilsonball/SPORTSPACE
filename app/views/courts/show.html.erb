@@ -1,242 +1,96 @@
-<div class="col-md-12">
-	<div class="row">				
-			<div class="col-md-12">
-				<span style="font-size:36px"><strong><%= @court.listing_name %></strong></span><br>					
-					<span id="average_rating"></span> <%= @reviews.count %> Review(s)<br><br>
-					<!--Write a review popup window or redirect to write a review area on this page-->
-					<div class="panel panel-default" style="max-width:300px">
-						<div id="map" style="max-width:100%;"></div>
-							<div class="panel-body">
-								<strong><%= @court.streetaddress %></strong>
-								<div style="float:right">
-									<% if current_user && current_user == @court.user %>
-									<%= link_to edit_court_path do %>
-									<span class="glyphicon glyphicon-pencil"></span> Edit
-									<% end %>
-										<br>
-									<% else %>
-										<!--<p><%= link_to "Suggest An Edit", edit_court_path %></p>-->
-									<% end %>
-								</div>
-								<br><strong><%= @court.city %>, <%= @court.state %> <%= @court.zip %></strong>
-								<br>Get Directions
+<div class="row">
+	<div class="col-md-12">
+		<span style="font-size:30px"><strong><%= @court.listing_name %></strong></span><br>
+		<span id="average_rating"></span> <%= @reviews.count %> Review(s)<br>
+		<br>
+	</div>
+</div>
 
-							</div>
-					</div>
-						<div class="row">
-							<div class="col-md-5 col-sm-6"><!--map-->
-								<style>
-						      #map {
-						        width: 100%;
-						        height: 250px;
-						      }
-				    		</style>
-							</div>
-							<% if @court.photos.count > 0 %>
-								<!--carousel-->
-								<!--<div class="col-md-4 col-md-offset-1 col-sm-6" style="max-width:300px;">
-									<div class="row">
-										<div class="col-md-12">
-											<div id="myCarousel" class="carousel slide" data-ride="carousel">-->
-											  <!-- Indicators -->
-											  <!--<% if @photos %>				  
-												  <ol class="carousel-indicators">
-												  	<% @photos.each do |photo| %>
-												    	<li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
-												    <% end %>
-												  </ol>
-											  <% end %>-->
-
-											  <!-- Wrapper for slides -->
-											  <!--<div class="carousel-inner" role="listbox">
-											  	<% if @photos %>
-											  	  <% @photos.each do |photo| %>
-											    	<div class="item <%= 'active' if photo.id == @photos[0].id %>">
-											      		<%= image_tag photo.image.url() %>
-											    	</div>
-											      <% end %>
-											    <% end %>
-											  </div>-->			    
-
-											  <!-- Left and right controls -->
-											  <!--<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-											    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-											    <span class="sr-only">Previous</span>
-											  </a>
-											  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-											    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-											    <span class="sr-only">Next</span>
-											  </a>
-											</div>
-										</div>
-									</div>
-								</div>-->
-							<% else %>
-							No photos. Be the first!
-							<% end %>
-						</div>
-					<!--icons-->
-					<div class="col-md-12">
-						<div class="row text-center row-space-3">
-							<% if @court.court_type != "Outdoor" %>
-								<div class="col-sm-3 col-xs-6">
-									<i class="fa fa-lightbulb-o fa-2x"></i>
-									<p><%= @court.court_type %> Court</p>
-									<p>
-								</div>
-							<% else %>
-								<div class="col-sm-3 col-xs-6">
-									<i class="fa fa-sun-o fa-2x"></i>
-									<p><%= @court.court_type %> Court</p>
-									<p>
-								</div>
-							<% end %>
-							<div class="col-sm-3 col-xs-6">
-								<i class="fa fa-users fa-2x"></i>
-								<p>People Played Here</p>
-							</div>
-							<div class="col-sm-3 col-xs-6">
-								<i class="fa fa-star fa-2x"></i>
-								<p><%= @court.fullcourtcount %> Full Court(s)</p>
-							</div>
-							<div class="col-sm-3 col-xs-6">
-								<i class="fa fa-star-half fa-2x"></i>
-								<p><%= @court.halfcourtcount %> Half Court(s)</p>
-							</div>
-						</div>
-					</div>
-
-					<!--reports-->
-					<div class="row">
-						<!--seengames-->
-						<div class="row">
-							<div class="col-md-8 col-sm-8">
-								<p><%= render 'seengames/list' %></p>
-							</div>
-							<div class="col-md-4 col-sm-4">
-								<%= render 'seengames/form' %>
-							</div>			
-						</div>
-						<!--seenplayers-->
-						<div class="row">
-							<div class="col-md-8 col-sm-8">
-								<p><%= render 'seenplayers/list' %></p>
-							</div>
-							<div class="col-md-4 col-sm-4">
-								<%= render 'seenplayers/form' %>
-							</div>				
-						</div>
-						<!--players commited-->
-						<!--<div class="row">
-							<div class="col-md-8 col-sm-8">
-								<p><%= render 'runs/list' %></p>
-							</div>
-							<div class="col-md-4 col-sm-4">
-								<%= render 'runs/form' %>
-							</div>														
-						</div>		
-					</div>
-
-					<!--summary-->
-					<!--<div class="row">
-						<div class="col-md-12">
-							<h3>Court Description</h3>
-							<p><%= @court.summary %></p>
-						</div>
-					</div>-->
-
-					<!--court features-->
-					<!--<h3>Court Features</h3>				
-					<div class"row">
-							<div class="col-md-12">
-								<div class="col-md-6">
-									<ul class="amenities">
-										<li><% if !@court.is_3pt %>
-											<i class="fa fa-square-o"></i> 3PT
-										<% else %>
-											<i class="fa fa-check-square-o"></i> 3PT
-										<% end %></li>
-										<li><% if !@court.is_ncaa3pt %>
-											<i class="fa fa-square-o"></i> NCAA 3PT
-										<% else %>
-											<i class="fa fa-check-square-o"></i> NCAA 3PT
-										<% end %></li>
-										<li><% if !@court.is_nba3pt %>
-											<i class="fa fa-square-o"></i> NBA 3PT
-										<% else %>
-											<i class="fa fa-check-square-o"></i> NBA 3PT
-										<% end %></li>
-								</div>
-								<div class="col-md-6">
-									<ul class="amenities">
-										<li><% if !@court.is_centercircle %>
-											<i class="fa fa-square-o"></i> Center Circle
-										<% else %>
-											<i class="fa fa-check-square-o"></i> Center Circle
-										<% end %></li>
-										<li>
-											<% if !@court.is_key %>
-												<i class="fa fa-square-o"></i> Key
-											<% else %>
-												<i class="fa fa-check-square-o"></i> Key
-											<% end %>
-										</li>
-										<li><% if !@court.is_freethrowline %>
-											<i class="fa fa-square-o"></i> Free Throw Line
-										<% else %>
-											<i class="fa fa-check-square-o"></i> Free Throw Line
-										<% end %></li>
-									</ul>
-								</div>
-							</div>					
-					</div>-->
-					<div class="col-md-8">
-					<h3 id="reviewsform">Reviews</h3>
-						<div>
-							<%= render 'reviews/form' if !@hasReview %>
-						</div>
-
-						<div id="reviews">
-							<%= render 'reviews/review' %>
-						</div>
-					</div>
-							
-
-						
-					<br>					
-
-				<!--add a photo-->
-
-				<hr>		
-
-					<!--Closeby-->
-					<h3>Nearby Courts</h3>
-					<div class="row">
-						<% for court in @court.nearbys(5).limit(3) %>
-							<div class ="col-md-4 col-sm-4">
-								<div class="panel panel-default">
-									<%= link_to court do %>
-										<div class="panel-heading preview">
-											<%= image_tag court.show_first_photo_medium %>
-										</div>
-										<div class="panel-body runs-title">
-											<%= link_to court.listing_name, court %><br>
-											(<%= court.distance.round(2) %> Miles Away)
-										</div>
-									<% end %>
-								</div>
-							</div>
-						<% end %>
-					</div>
-
+<div class="row">
+	<div class="col-md-4">
+		<div class="panel panel-default" style="max-width:300px">
+			<div id="map" style="max-width:100%;"></div>
+			<div class="panel-body">
+				<strong><%= @court.streetaddress %></strong>
+				<div style="float:right">
+					<% if current_user && current_user == @court.user %>
+					<%= link_to edit_court_path do %>
+					<span class="glyphicon glyphicon-pencil"></span> Edit
+					<% end %>
+						<br>
+					<% else %>
+						<!--<p><%= link_to "Suggest An Edit", edit_court_path %></p>-->
+					<% end %>
 				</div>
+				<br>
+				<strong><%= @court.city %>, <%= @court.state %> <%= @court.zip %></strong>
+				<br>
+				<a href data-toggle="modal" data-target="#get_directions">
+				  Get Directions
+				</a>
 
-				<!--checkins feed-->
+				<!--start get_directions modal-->
+				<div class="modal fade" id="get_directions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				      </div>
+				      <div class="modal-body">
+				        ...
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<!--end get_directions modal-->
 
-				<!--heatmap-->
 			</div>
 		</div>
 	</div>
+	<div class="col-md-8">
+		<%= render 'seenplayers/list' %><br>
+		<%= render 'seengames/list' %>
+	</div>
+</div>
+
+<div class="row">
+	<%= render 'features' %>
+</div>
+
+<div class="row">
+	<div class="col-md-8">
+		<%= render 'reviews/form' %>
+		<%= render 'reviews/review' %>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<span style="font-size:24px">Nearby Courts</span><br>
+</div>
+
+<div class="row">
+	<% for court in @court.nearbys(5).limit(3) %>
+		<div class ="col-md-4 col-sm-4">
+			<div class="panel panel-default">
+				<%= link_to court do %>
+					<div class="panel-heading preview">
+						<%= image_tag court.show_first_photo_medium %>
+					</div>
+					<div class="panel-body runs-title">
+						<%= link_to court.listing_name, court %><br>
+						(<%= court.distance.round(2) %> Miles Away)
+					</div>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>
+
 
 <script>
 	$('#average_rating').raty({
@@ -245,31 +99,6 @@
 		score: <%= @court.average_rating %>
 	});
 </script>
-
-<!--<script>
-$(function(){ // document ready
- 
-  if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
- 
-    var stickyTop = $('.sticky').offset().top; // returns number 
- 
-    $(window).scroll(function(){ // scroll event
- 
-      var windowTop = $(window).scrollTop(); // returns number 
- 
-      if (stickyTop < windowTop){
-        $('.sticky').css({ position: 'fixed', top: 0 });
-      }
-      else {
-        $('.sticky').css('position','static');
-      }
- 
-    });
- 
-  }
- 
-});
-</script>-->
 
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 
@@ -306,3 +135,10 @@ $(function(){ // document ready
   }
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+
+<style>
+  #map {
+    width: 100%;
+    height: 250px;
+  }
+</style>

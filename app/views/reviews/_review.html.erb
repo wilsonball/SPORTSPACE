@@ -6,10 +6,10 @@
 	<hr>
 
 	<div class="row">
-		<div class="col-md-1 col-xs-2">
-			<%= image_tag avatar_url(review.user), class: "img-circle avatar-medium" %>
+		<div class="col-md-2 col-xs-2">
+			<%= image_tag avatar_url(review.user), class: "img-rounded avatar-medium" %>
 		</div>
-		<div class="col-md-11 col-xs-10">
+		<div class="col-md-10 col-xs-10">
 			<strong><%= review.user.fullname %> <div id="stars_<%= review.id %>"></div></strong>
 		</div>
 

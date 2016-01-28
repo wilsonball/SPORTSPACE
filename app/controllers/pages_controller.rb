@@ -11,13 +11,13 @@ class PagesController < ApplicationController
       .group("courts.id")
 
 
-    if params[:coords].present? && params[:coords].strip != ""
-      if params[:coords] =~ /-?\d+(\.\d+)?,-?\d+(\.\d+)?/
-        location = params[:coords].split(',').map{|num| Float(num)}
+    if params[:search_coords].present? && params[:search_coords].strip != ""
+      if params[:search_coords] =~ /-?\d+(\.\d+)?,-?\d+(\.\d+)?/
+        location = params[:search_coords].split(',').map{|num| Float(num)}
         @search = @search.near(location, 25, order: 'distance')
       end
     else
-      @search = @search.near(params[:address], 25, order: 'distance')
+      @search = @search.near(params[:search_location], 25, order: 'distance')
       
     end
 
@@ -55,7 +55,7 @@ class PagesController < ApplicationController
     #if params[:name].present? && params[:name].strip != ""
       #puts "adding name search"
       @search = @search
-        .ransack(listing_name_cont: params[:name])
+        .ransack(listing_name_cont: params[:search_name])
       @search = @search
         .result
         .ransack(params[:q])

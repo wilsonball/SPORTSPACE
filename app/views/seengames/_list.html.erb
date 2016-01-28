@@ -1,6 +1,6 @@
 <% if @court.seengames.count > 0 %>
 	<% @court.seengames.order('created_at desc').limit(5).each do |seengames| %>
-		<span style="font-weight:bold"><%= seengames.games %></span> game(s) back last reported at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
+		<span style="font-weight:bold"><%= seengames.games %></span> game(s) wait last seen at <%= seengames.created_at.strftime('%a %m/%e/%y %l:%M %p') %><br>
 		<%= link_to like_seengame_path(seengames), method: :put do %>
 		  <%= seengames.get_upvotes.size %>
 		  <span class="glyphicon glyphicon-thumbs-up"></span> True

@@ -27,17 +27,19 @@
     var canSubmit = false;
 
     $('#search_form').on("submit", function (e) {
-        var address = $('#address').val();
-      
-        if (address) {
-            // user already inputted address, so we can submit form
+        var search_location = $('#search_location').val();
+        var search_name = $('#search_name').val();
+
+
+        if (search_location || search_name) {
+            // user already inputted location or name, so we can submit form
             canSubmit = true;
         } else {
             // try to get location for user
             function onSuccess(location) {
               var coords = location.coords.latitude + "," + location.coords.longitude;
-              $('#address').val("Current Location");
-              $('#coords').val(coords);
+              $('#search_location').val("Current Location");
+              $('#search_coords').val(coords);
               $('#search_form').submit();   
             }
 

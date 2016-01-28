@@ -13,10 +13,11 @@
         </div>
           <%= form_tag search_path, class: "navbar-form navbar-left", id: "search_form", method: :get do |f| %>
             <div class="form-group">
-              <%= text_field_tag :name, params[:name], placeholder: "Name", class: "form-control input-sm" %>
-              <%= text_field_tag :address, params[:address], placeholder: "Location", class: "form-control input-sm" %>
+              <%= text_field_tag :search_name, params[:search_name], placeholder: "Name", class: "form-control input-sm" %>
+              <%= text_field_tag :search_location, params[:search_location], placeholder: "Location", class: "form-control input-sm" %>
+              <%= text_field_tag :search_coords, params[:search_coords], type: "hidden" %>
               <% if user_signed_in? %>
-                <%= submit_tag "Search", class: "btn btn-primary btn-sm" %>
+                <%= submit_tag "Search", class: "btn btn-warning btn-sm" %>
               <% else %>
                 <%= submit_tag "Search", class: "btn btn-warning btn-sm" %>
               <% end %>
@@ -27,7 +28,7 @@
 
             <% if (!user_signed_in?) %>
               <li class="text-center"><%= link_to "Log In", new_user_session_path %></li>
-              <li class="text-center"><%= button_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-sm navbar-btn" %></li>
+              <li class="text-center"><%= button_to "Sign Up", new_user_registration_path, class: "btn btn-warning btn-sm navbar-btn" %></li>
             <% else %>
               
               <li  class="dropdown navbar-dropdown text-center">
